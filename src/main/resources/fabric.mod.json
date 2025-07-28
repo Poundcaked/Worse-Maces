@@ -1,29 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "worse_maces",
+  "id": "worsemaces",
   "version": "${version}",
   "name": "Worse Maces",
   "description": "",
-  "authors": [],
+  "authors": [
+    "Poundcake"
+  ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/worse_maces/icon.png",
+  "icon": "assets/worsemaces/icon.png",
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "com.gorgonine.worse_maces.client.Worse_macesDataGenerator"
+      "com.gorgonine.worsemaces.client.WorseMacesDataGenerator"
     ],
     "client": [
-      "com.gorgonine.worse_maces.client.Worse_macesClient"
+      "com.gorgonine.worsemaces.client.WorseMacesClient"
     ],
     "main": [
-      "com.gorgonine.worse_maces.Worse_maces"
+      "com.gorgonine.worsemaces.WorseMaces"
     ]
   },
   "mixins": [
-    "worse_maces.mixins.json",
+    "worsemaces.mixins.json",
     {
-      "config": "worse_maces.client.mixins.json",
+      "config": "worsemaces.client.mixins.json",
       "environment": "client"
     }
   ],

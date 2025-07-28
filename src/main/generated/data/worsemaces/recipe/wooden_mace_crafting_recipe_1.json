@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "worsemaces:wooden_core",
+    "s": "minecraft:stick"
+  },
+  "pattern": [
+    " C ",
+    " s ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "worsemaces:wooden_mace"
+  }
+}

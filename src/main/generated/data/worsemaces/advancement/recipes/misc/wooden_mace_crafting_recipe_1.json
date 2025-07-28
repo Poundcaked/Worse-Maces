@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "worsemaces:wooden_mace_crafting_recipe_1"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wooden_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:wooden_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wooden_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "worsemaces:wooden_mace_crafting_recipe_1"
+    ]
+  }
+}

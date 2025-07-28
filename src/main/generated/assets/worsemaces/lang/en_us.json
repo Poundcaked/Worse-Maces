@@ -1,0 +1,9 @@
+{
+  "effect.worsemaces.splinter": "Splinter",
+  "item.worsemaces.unfinished_core": "Unfinished Core",
+  "item.worsemaces.unfinished_mace": "Unfinished Mace",
+  "item.worsemaces.wooden_core": "Wooden Core",
+  "item.worsemaces.wooden_mace": "Wooden Mace",
+  "itemgroup.worsemaces.cores_group": "Core Group",
+  "itemgroup.worsemaces.maces_group": "Maces Group"
+}

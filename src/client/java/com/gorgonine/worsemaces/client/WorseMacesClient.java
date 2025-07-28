@@ -1,8 +1,8 @@
-package com.gorgonine.worse_maces.client;
+package com.gorgonine.worsemaces.client;
 
 import net.fabricmc.api.ClientModInitializer;
 
-public class Worse_macesClient implements ClientModInitializer {
+public class WorseMacesClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
