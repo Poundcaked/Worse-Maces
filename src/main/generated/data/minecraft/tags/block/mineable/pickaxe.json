@@ -1,5 +1,7 @@
 {
   "values": [
-    "worsemaces:wooden_core"
+    "worsemaces:unfinished_core",
+    "worsemaces:gamblers_core",
+    "worsemaces:brass_bell_core"
   ]
 }

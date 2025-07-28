@@ -14,5 +14,6 @@ public class WorseMaces implements ModInitializer {
         ModBlocks.registerModBlocks();
         ModEffects.registerEffects();
         ModItemGroups.registerItemGroups();
+        ModSounds.registerSounds();
     }
 }

@@ -17,11 +17,14 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerSimpleState(ModBlocks.WOODEN_CORE);
         blockStateModelGenerator.registerSimpleState(ModBlocks.UNFINISHED_CORE);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.GAMBLERS_CORE);
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.WOODEN_MACE, Models.HANDHELD_MACE);
         itemModelGenerator.register(ModItems.UNFINISHED_MACE, Models.HANDHELD_MACE);
+        itemModelGenerator.register(ModItems.GAMBLERS_MACE, Models.HANDHELD_MACE);
+        itemModelGenerator.register(ModItems.BRASS_BELL_MACE, Models.HANDHELD_MACE);
     }
 }

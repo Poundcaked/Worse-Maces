@@ -1,5 +1,9 @@
 {
   "effect.worsemaces.splinter": "Splinter",
+  "item.worsemaces.brass_bell_core": "Bell Core",
+  "item.worsemaces.brass_bell_mace": "Brass Bell Mace",
+  "item.worsemaces.gamblers_core": "Gambler's Core",
+  "item.worsemaces.gamblers_mace": "Gambler's Mace",
   "item.worsemaces.unfinished_core": "Unfinished Core",
   "item.worsemaces.unfinished_mace": "Unfinished Mace",
   "item.worsemaces.wooden_core": "Wooden Core",

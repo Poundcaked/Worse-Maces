@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "minecraft:white_concrete",
+    "s": "minecraft:wither_skeleton_skull"
+  },
+  "pattern": [
+    "sWs",
+    "WsW",
+    "sWs"
+  ],
+  "result": {
+    "count": 1,
+    "id": "worsemaces:wooden_core"
+  }
+}

@@ -1,6 +1,5 @@
 package com.gorgonine.worsemaces;
 
-import com.gorgonine.worsemaces.block.WoodenCore;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -12,7 +11,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.*;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import org.spongepowered.include.com.google.common.base.Function;
@@ -23,7 +21,7 @@ public class ModBlocks {
             "wooden_core",
             HeavyCoreBlock::new,
             AbstractBlock.Settings.create()
-                    .mapColor(MapColor.IRON_GRAY)
+                    .mapColor(MapColor.OAK_TAN)
                     .instrument(NoteBlockInstrument.BASS)
                     .sounds(BlockSoundGroup.WOOD)
                     .strength(2.0F)
@@ -37,7 +35,33 @@ public class ModBlocks {
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.IRON_GRAY)
                     .instrument(NoteBlockInstrument.SNARE)
-                    .sounds(BlockSoundGroup.WOOD)
+                    .sounds(BlockSoundGroup.HEAVY_CORE)
+                    .strength(10.0F)
+                    .pistonBehavior(PistonBehavior.NORMAL)
+                    .requiresTool()
+                    .resistance(1200.0F),
+            true
+    );
+    public static final Block GAMBLERS_CORE = register(
+            "gamblers_core",
+            HeavyCoreBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WHITE)
+                    .instrument(NoteBlockInstrument.SNARE)
+                    .sounds(BlockSoundGroup.HEAVY_CORE)
+                    .strength(10.0F)
+                    .pistonBehavior(PistonBehavior.NORMAL)
+                    .requiresTool()
+                    .resistance(1200.0F),
+            true
+    );
+    public static final Block BRASS_BELL_CORE = register(
+            "brass_bell_core",
+            HeavyCoreBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.GOLD)
+                    .instrument(NoteBlockInstrument.BELL)
+                    .sounds(BlockSoundGroup.HEAVY_CORE)
                     .strength(10.0F)
                     .pistonBehavior(PistonBehavior.NORMAL)
                     .requiresTool()
@@ -67,6 +91,7 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.add(ModBlocks.WOODEN_CORE);
             entries.add(ModBlocks.UNFINISHED_CORE);
+            entries.add(ModBlocks.GAMBLERS_CORE);
         });
     }
 

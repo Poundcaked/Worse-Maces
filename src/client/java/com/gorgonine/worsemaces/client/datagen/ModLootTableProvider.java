@@ -15,5 +15,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         addDrop(ModBlocks.WOODEN_CORE);
+        addDrop(ModBlocks.UNFINISHED_CORE);
+        addDrop(ModBlocks.GAMBLERS_CORE);
+        addDrop(ModBlocks.BRASS_BELL_CORE);
     }
 }

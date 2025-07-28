@@ -1,2 +1,5 @@
 // 1.21.8	-999999999-01-01T00:00:00	Worse Maces/Block Loot Tables
+7ffb1c4bb1ceecb89fca1fae5dd7133f228cb804 data/worsemaces/loot_table/blocks/brass_bell_core.json
+365ae233ff5e53322bda7524569a90aa09427a74 data/worsemaces/loot_table/blocks/gamblers_core.json
+6d518aa38bb25d4a8083c581901cd79da8a213bd data/worsemaces/loot_table/blocks/unfinished_core.json
 fd251a86ffc961dadc0da8d9eaf1730da8ded092 data/worsemaces/loot_table/blocks/wooden_core.json

@@ -16,6 +16,8 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.WOODEN_MACE);
                         entries.add(ModItems.UNFINISHED_MACE);
+                        entries.add(ModItems.GAMBLERS_MACE);
+                        entries.add(ModItems.BRASS_BELL_MACE);
                     }).build());
 
     public static final ItemGroup CORES_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -25,6 +27,8 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModBlocks.WOODEN_CORE);
                         entries.add(ModBlocks.UNFINISHED_CORE);
+                        entries.add(ModBlocks.GAMBLERS_CORE);
+                        entries.add(ModBlocks.BRASS_BELL_CORE);
                     }).build());
 
 

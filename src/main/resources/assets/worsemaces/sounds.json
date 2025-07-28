@@ -1,0 +1,14 @@
+{
+  "bell_hit": {
+    "subtitle": "sounds.worsemaces.bell_hit",
+    "sounds": [
+      "worsemaces:bell_hit"
+    ]
+  },
+  "tinnitus": {
+    "subtitle": "sounds.worsemaces.tinnitus",
+    "sounds":[
+      "worsemaces:tinnitus"
+    ]
+  }
+}

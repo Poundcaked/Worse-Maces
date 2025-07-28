@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gamblers_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:gamblers_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "worsemaces:gamblers_mace_crafting_recipe_1"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gamblers_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "worsemaces:gamblers_mace_crafting_recipe_1"
+    ]
+  }
+}

@@ -15,9 +15,13 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add("item.worsemaces.wooden_mace", "Wooden Mace");
         translationBuilder.add("item.worsemaces.unfinished_mace", "Unfinished Mace");
+        translationBuilder.add("item.worsemaces.gamblers_mace", "Gambler's Mace");
+        translationBuilder.add("item.worsemaces.brass_bell_mace", "Brass Bell Mace");
 
         translationBuilder.add("item.worsemaces.wooden_core", "Wooden Core");
         translationBuilder.add("item.worsemaces.unfinished_core", "Unfinished Core");
+        translationBuilder.add("item.worsemaces.gamblers_core", "Gambler's Core");
+        translationBuilder.add("item.worsemaces.brass_bell_core", "Bell Core");
 
         translationBuilder.add("itemgroup.worsemaces.maces_group", "Maces Group");
         translationBuilder.add("itemgroup.worsemaces.cores_group", "Core Group");
