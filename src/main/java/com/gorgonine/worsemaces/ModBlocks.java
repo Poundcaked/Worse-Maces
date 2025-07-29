@@ -1,10 +1,8 @@
 package com.gorgonine.worsemaces;
 
+import com.gorgonine.worsemaces.block.BronzeBellCore;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.HeavyCoreBlock;
-import net.minecraft.block.MapColor;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
@@ -57,7 +55,7 @@ public class ModBlocks {
     );
     public static final Block BRASS_BELL_CORE = register(
             "brass_bell_core",
-            HeavyCoreBlock::new,
+            BronzeBellCore::new,
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.GOLD)
                     .instrument(NoteBlockInstrument.BELL)
@@ -66,6 +64,46 @@ public class ModBlocks {
                     .pistonBehavior(PistonBehavior.NORMAL)
                     .requiresTool()
                     .resistance(1200.0F),
+            true
+    );
+    public static final Block POTION_CORE = register(
+            "potion_core",
+            HeavyCoreBlock::new,
+            AbstractBlock.Settings.create()
+                    .instrument(NoteBlockInstrument.HAT)
+                    .strength(0.3F)
+                    .sounds(BlockSoundGroup.GLASS)
+                    .nonOpaque()
+                    .allowsSpawning(Blocks::never)
+                    .solidBlock(Blocks::never)
+                    .suffocates(Blocks::never)
+                    .blockVision(Blocks::never),
+            true
+    );
+    public static final Block GROSS_CORE = register(
+            "gross_core",
+            HeavyCoreBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.PALE_GREEN)
+                    .slipperiness(0.8F)
+                    .sounds(BlockSoundGroup.SLIME)
+                    .nonOpaque(),
+            true
+    );
+    public static final Block APPLE_CORE = register(
+            "apple_core",
+            HeavyCoreBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.RED)
+                    .sounds(BlockSoundGroup.STONE),
+            true
+    );
+    public static final Block PUFFERFISH_CORE = register(
+            "pufferfish_core",
+            HeavyCoreBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WHITE)
+                    .sounds(BlockSoundGroup.WET_SPONGE),
             true
     );
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

@@ -18,5 +18,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.UNFINISHED_CORE);
         addDrop(ModBlocks.GAMBLERS_CORE);
         addDrop(ModBlocks.BRASS_BELL_CORE);
+        addDrop(ModBlocks.POTION_CORE);
+        addDrop(ModBlocks.GROSS_CORE);
+        addDrop(ModBlocks.APPLE_CORE);
+        addDrop(ModBlocks.PUFFERFISH_CORE);
     }
 }

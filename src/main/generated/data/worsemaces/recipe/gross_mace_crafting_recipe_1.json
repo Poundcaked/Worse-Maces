@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "worsemaces:gross_core",
+    "s": "minecraft:glass"
+  },
+  "pattern": [
+    " C ",
+    " s ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "worsemaces:gross_mace"
+  }
+}

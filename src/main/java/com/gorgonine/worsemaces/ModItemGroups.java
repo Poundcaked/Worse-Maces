@@ -18,6 +18,10 @@ public class ModItemGroups {
                         entries.add(ModItems.UNFINISHED_MACE);
                         entries.add(ModItems.GAMBLERS_MACE);
                         entries.add(ModItems.BRASS_BELL_MACE);
+                        entries.add(ModItems.POTION_MACE);
+                        entries.add(ModItems.GROSS_MACE);
+                        entries.add(ModItems.APPLE_MACE);
+                        entries.add(ModItems.PUFFERFISH_MACE);
                     }).build());
 
     public static final ItemGroup CORES_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -29,6 +33,10 @@ public class ModItemGroups {
                         entries.add(ModBlocks.UNFINISHED_CORE);
                         entries.add(ModBlocks.GAMBLERS_CORE);
                         entries.add(ModBlocks.BRASS_BELL_CORE);
+                        entries.add(ModBlocks.POTION_CORE);
+                        entries.add(ModBlocks.GROSS_CORE);
+                        entries.add(ModBlocks.APPLE_CORE);
+                        entries.add(ModBlocks.PUFFERFISH_CORE);
                     }).build());
 
 

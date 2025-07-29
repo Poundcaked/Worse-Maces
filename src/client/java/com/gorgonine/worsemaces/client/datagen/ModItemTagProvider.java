@@ -17,6 +17,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         valueLookupBuilder(ItemTags.MACE_ENCHANTABLE)
-                .add(ModItems.WOODEN_MACE);
+                .add(ModItems.WOODEN_MACE)
+                .add(ModItems.UNFINISHED_MACE)
+                .add(ModItems.GAMBLERS_MACE)
+                .add(ModItems.BRASS_BELL_MACE)
+                .add(ModItems.POTION_MACE)
+                .add(ModItems.GROSS_MACE)
+                .add(ModItems.APPLE_MACE);
     }
 }

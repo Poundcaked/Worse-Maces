@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_potion_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:potion_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "worsemaces:potion_mace_crafting_recipe_1"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_potion_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "worsemaces:potion_mace_crafting_recipe_1"
+    ]
+  }
+}

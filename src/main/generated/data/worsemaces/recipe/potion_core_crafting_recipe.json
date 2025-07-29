@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "minecraft:potion",
+    "e": "minecraft:heavy_core",
+    "s": "minecraft:glass"
+  },
+  "pattern": [
+    "WWW",
+    "ses",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "worsemaces:potion_core"
+  }
+}

@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 public class ModSounds {
     public static final SoundEvent bell_hit = registerSoundEvent("bell_hit");
     public static final SoundEvent tinnitus = registerSoundEvent("tinnitus");
+    public static final SoundEvent pufferfish_noise = registerSoundEvent("pufferfish_noise");
 
     private static SoundEvent registerSoundEvent(String name){
         Identifier id = Identifier.of(WorseMaces.MOD_ID, name);

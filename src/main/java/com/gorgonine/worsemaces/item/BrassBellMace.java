@@ -36,7 +36,7 @@ public class BrassBellMace extends Item {
     private static int ATTACK_DAMAGE_MODIFIER_VALUE = 5;
     private static float ATTACK_SPEED_MODIFIER_VALUE = -3.0F;
     public static  float KNOCKBACK_RANGE = 10.5F;
-    private static float KNOCKBACK_POWER = 10.7F;
+    private static float KNOCKBACK_POWER = 2.7F;
     private static double ABSOLUTE_MINIMUM_FALL_DISTANCE = 1.5F;
     private static double MAX_MIN_FALL_DISTANCE = 3.0F;
     private static  double MIDDLE_FALL_DISTANCE = 8.0F;
@@ -160,8 +160,10 @@ public class BrassBellMace extends Item {
             Vec3d vec3d2 = vec3d.normalize().multiply(d);
             if (d > 0.0) {
                 entity.addVelocity(vec3d2.x, KNOCKBACK_POWER, vec3d2.z);
-                var slowness = new StatusEffectInstance(StatusEffects.SLOWNESS, 4 * 20, 1, false, true, true);
+                var slowness = new StatusEffectInstance(StatusEffects.SLOWNESS, 4 * 20, 7, false, true, true);
                 entity.addStatusEffect(slowness);
+                var jump_boost = new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4 * 20, 127, false, true, true);
+                entity.addStatusEffect(jump_boost);
                 var blindness = new StatusEffectInstance(StatusEffects.BLINDNESS, 1 * 20, 0, false, true, true);
                 entity.addStatusEffect(blindness);
                 if (entity instanceof ServerPlayerEntity) {

@@ -60,6 +60,38 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.IRON_INGOT)
                         .criterion(hasItem(ModBlocks.BRASS_BELL_CORE), conditionsFromItem(ModBlocks.BRASS_BELL_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "brass_bell_mace_crafting_recipe_1")));
+                createShaped(RecipeCategory.MISC, ModItems.POTION_MACE)
+                        .pattern(" C ")
+                        .pattern(" s ")
+                        .pattern("   ")
+                        .input('C', ModBlocks.POTION_CORE)
+                        .input('s', Items.GLASS)
+                        .criterion(hasItem(ModBlocks.POTION_CORE), conditionsFromItem(ModBlocks.POTION_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "potion_mace_crafting_recipe_1")));
+                createShaped(RecipeCategory.MISC, ModItems.GROSS_MACE)
+                        .pattern(" C ")
+                        .pattern(" s ")
+                        .pattern("   ")
+                        .input('C', ModBlocks.GROSS_CORE)
+                        .input('s', Items.GLASS)
+                        .criterion(hasItem(ModBlocks.GROSS_CORE), conditionsFromItem(ModBlocks.GROSS_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "gross_mace_crafting_recipe_1")));
+                createShaped(RecipeCategory.MISC, ModItems.APPLE_MACE)
+                        .pattern(" C ")
+                        .pattern(" s ")
+                        .pattern("   ")
+                        .input('C', ModBlocks.APPLE_CORE)
+                        .input('s', Items.GLASS)
+                        .criterion(hasItem(ModBlocks.APPLE_CORE), conditionsFromItem(ModBlocks.APPLE_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "apple_mace_crafting_recipe_1")));
+                createShaped(RecipeCategory.MISC, ModItems.PUFFERFISH_MACE)
+                        .pattern(" C ")
+                        .pattern(" s ")
+                        .pattern("   ")
+                        .input('C', ModBlocks.PUFFERFISH_CORE)
+                        .input('s', Items.GLASS)
+                        .criterion(hasItem(ModBlocks.PUFFERFISH_CORE), conditionsFromItem(ModBlocks.PUFFERFISH_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "pufferfish_mace_crafting_recipe_1")));
 
                 //CORES
                 createShaped(RecipeCategory.MISC, ModBlocks.WOODEN_CORE)
@@ -70,7 +102,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .criterion(hasItem(Items.OAK_LOG), conditionsFromItem(Items.OAK_LOG))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "wooden_core_crafting_recipe")));
 
-                createShaped(RecipeCategory.MISC, ModBlocks.WOODEN_CORE)
+                createShaped(RecipeCategory.MISC, ModBlocks.GAMBLERS_CORE)
                         .pattern("sWs")
                         .pattern("WsW")
                         .pattern("sWs")
@@ -78,6 +110,57 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.WITHER_SKELETON_SKULL)
                         .criterion(hasItem(Items.WITHER_SKELETON_SKULL), conditionsFromItem(Items.WITHER_SKELETON_SKULL))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "gamblers_core_crafting_recipe")));
+
+                createShaped(RecipeCategory.MISC, ModBlocks.UNFINISHED_CORE)
+                        .pattern("WWW")
+                        .pattern("WsW")
+                        .pattern("WWW")
+                        .input('W', Items.TNT)
+                        .input('s', Items.HEAVY_CORE)
+                        .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "unfinished_core_crafting_recipe")));
+                createShaped(RecipeCategory.MISC, ModBlocks.BRASS_BELL_CORE)
+                        .pattern(" W ")
+                        .pattern("WeW")
+                        .pattern("W W")
+                        .input('W', Items.BELL)
+                        .input('e', Items.NETHER_STAR)
+                        .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "brass_bell_core_crafting_recipe")));
+                createShaped(RecipeCategory.MISC, ModBlocks.POTION_CORE)
+                        .pattern("WWW")
+                        .pattern("ses")
+                        .pattern("WWW")
+                        .input('W', Items.POTION)
+                        .input('s', Items.GLASS)
+                        .input('e', Items.HEAVY_CORE)
+                        .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "potion_core_crafting_recipe")));
+                createShaped(RecipeCategory.MISC, ModBlocks.GROSS_CORE)
+                        .pattern("WeW")
+                        .pattern("ese")
+                        .pattern("WeW")
+                        .input('W', Items.SLIME_BALL)
+                        .input('s', Items.HEAVY_CORE)
+                        .input('e', Items.COARSE_DIRT)
+                        .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "gross_core_crafting_recipe")));
+                createShaped(RecipeCategory.MISC, ModBlocks.APPLE_CORE)
+                        .pattern("WWW")
+                        .pattern("WsW")
+                        .pattern("WWW")
+                        .input('W', Items.APPLE)
+                        .input('s', Items.HEAVY_CORE)
+                        .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "apple_core_crafting_recipe")));
+                createShaped(RecipeCategory.MISC, ModBlocks.PUFFERFISH_CORE)
+                        .pattern("WWW")
+                        .pattern("WsW")
+                        .pattern("WWW")
+                        .input('W', Items.PUFFERFISH)
+                        .input('s', Items.HEAVY_CORE)
+                        .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
+                        .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "pufferfish_core_crafting_recipe")));
             }
         };
     }

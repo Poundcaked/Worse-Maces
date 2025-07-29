@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "minecraft:slime_ball",
+    "e": "minecraft:coarse_dirt",
+    "s": "minecraft:heavy_core"
+  },
+  "pattern": [
+    "WeW",
+    "ese",
+    "WeW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "worsemaces:gross_core"
+  }
+}

@@ -4,6 +4,8 @@ import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -111,10 +113,15 @@ public class UnfinishedMace extends BaseMace {
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (shouldDealAdditionalDamage(attacker)) {
             ServerWorld serverWorld = (ServerWorld) attacker.getWorld();
+            if(random.nextInt(100) <10){
+                LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT,serverWorld);
+                serverWorld.spawnEntity(lightning);
+            }
+
             if (random.nextBoolean()){
                 attacker.setVelocity(attacker.getVelocity().withAxis(Direction.Axis.Y, 0.009999999776482582));
             }else {
-                attacker.setVelocity(attacker.getVelocity().withAxis(Direction.Axis.Y, -5));
+                attacker.setVelocity(attacker.getVelocity().withAxis(Direction.Axis.Y, random.nextFloat(-5,5)));
             }
 
             ServerPlayerEntity serverPlayerEntity;
@@ -143,8 +150,9 @@ public class UnfinishedMace extends BaseMace {
                     serverWorld.playSound((Entity) null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.ITEM_MACE_SMASH_AIR, attacker.getSoundCategory(), random.nextFloat(3.0F), random.nextFloat(10.0F));
                 }
             }
-
-                knockbackNearbyEntities(serverWorld, attacker, target);
+                if (random.nextBoolean()){
+                    knockbackNearbyEntities(serverWorld, attacker, target);
+                }
             }
     }
 

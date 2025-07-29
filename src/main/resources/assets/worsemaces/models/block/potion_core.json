@@ -1,0 +1,55 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "worsemaces:block/potion_core",
+		"all": "worsemaces:block/potion_core"
+	},
+	"elements": [
+		{
+			"name": "potion_core",
+			"from": [4, 0, 4],
+			"to": [12, 8, 12],
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"east": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#all"},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#all"}
+			}
+		},
+		{
+			"name": "potion_fluid",
+			"from": [4, 4, 4],
+			"to": [12, 4, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 2, 4]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 0], "texture": "#missing"},
+				"east": {"uv": [0, 0, 8, 0], "texture": "#missing"},
+				"south": {"uv": [0, 0, 8, 0], "texture": "#missing"},
+				"west": {"uv": [0, 0, 8, 0], "texture": "#missing"},
+				"up": {"uv": [8, 8, 16, 16], "texture": "#all"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#missing"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [45, 45, 0],
+			"translation": [0, 3, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [0, 3, 0]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 4, 0]
+		}
+	}
+}

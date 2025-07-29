@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "minecraft:bell",
+    "e": "minecraft:nether_star"
+  },
+  "pattern": [
+    " W ",
+    "WeW",
+    "W W"
+  ],
+  "result": {
+    "count": 1,
+    "id": "worsemaces:brass_bell_core"
+  }
+}

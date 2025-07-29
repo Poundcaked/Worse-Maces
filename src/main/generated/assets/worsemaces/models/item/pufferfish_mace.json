@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld_mace",
+  "textures": {
+    "layer0": "worsemaces:item/pufferfish_mace"
+  }
+}

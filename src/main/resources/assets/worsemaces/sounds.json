@@ -10,5 +10,11 @@
     "sounds":[
       "worsemaces:tinnitus"
     ]
+  },
+  "pufferfish_noise": {
+    "subtitle": "sounds.worsemaces.pufferfish_noise",
+    "sounds":[
+      "worsemaces:pufferfish_noise"
+    ]
   }
 }

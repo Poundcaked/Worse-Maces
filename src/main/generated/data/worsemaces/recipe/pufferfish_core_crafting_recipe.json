@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "minecraft:pufferfish",
+    "s": "minecraft:heavy_core"
+  },
+  "pattern": [
+    "WWW",
+    "WsW",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "worsemaces:pufferfish_core"
+  }
+}

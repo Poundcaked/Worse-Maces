@@ -1,9 +1,6 @@
 package com.gorgonine.worsemaces;
 
-import com.gorgonine.worsemaces.item.BrassBellMace;
-import com.gorgonine.worsemaces.item.GamblersMace;
-import com.gorgonine.worsemaces.item.UnfinishedMace;
-import com.gorgonine.worsemaces.item.WoodenMace;
+import com.gorgonine.worsemaces.item.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.WeaponComponent;
@@ -23,7 +20,7 @@ public class ModItems {
             "wooden_mace",
             WoodenMace::new,
             new Item.Settings()
-                    .maxDamage(20)
+                    .maxDamage(59)
                     .component(DataComponentTypes.TOOL, WoodenMace.createToolComponent())
                     .repairable(ItemTags.LOGS)
                     .attributeModifiers(WoodenMace.createAttributeModifiers())
@@ -37,7 +34,7 @@ public class ModItems {
             UnfinishedMace::new,
             new Item.Settings()
                     .rarity(Rarity.EPIC)
-                    .maxDamage(1000)
+                    .maxDamage(250)
                     .component(DataComponentTypes.TOOL, UnfinishedMace.createToolComponent())
                     .attributeModifiers(UnfinishedMace.createAttributeModifiers())
                     .enchantable(15)
@@ -50,7 +47,7 @@ public class ModItems {
             GamblersMace::new,
             new Item.Settings()
                     .rarity(Rarity.EPIC)
-                    .maxDamage(2000)
+                    .maxDamage(500)
                     .component(DataComponentTypes.TOOL, GamblersMace.createToolComponent())
                     .attributeModifiers(GamblersMace.createAttributeModifiers())
                     .enchantable(15)
@@ -63,10 +60,58 @@ public class ModItems {
             BrassBellMace::new,
             new Item.Settings()
                     .rarity(Rarity.EPIC)
-                    .maxDamage(2000)
+                    .maxDamage(750)
                     .component(DataComponentTypes.TOOL, BrassBellMace.createToolComponent())
                     .attributeModifiers(BrassBellMace.createAttributeModifiers())
                     .enchantable(15)
+                    .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
+
+    );
+    public static final Item POTION_MACE = registerItem(
+            "potion_mace",
+            PotionMace::new,
+            new Item.Settings()
+                    .rarity(Rarity.EPIC)
+                    .maxDamage(400)
+                    .component(DataComponentTypes.TOOL, PotionMace.createToolComponent())
+                    .attributeModifiers(PotionMace.createAttributeModifiers())
+                    .enchantable(8)
+                    .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
+
+    );
+    public static final Item GROSS_MACE = registerItem(
+            "gross_mace",
+            GrossMace::new,
+            new Item.Settings()
+                    .rarity(Rarity.RARE)
+                    .maxDamage(350)
+                    .component(DataComponentTypes.TOOL, GrossMace.createToolComponent())
+                    .attributeModifiers(GrossMace.createAttributeModifiers())
+                    .enchantable(2)
+                    .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
+
+    );
+    public static final Item APPLE_MACE = registerItem(
+            "apple_mace",
+            AppleMace::new,
+            new Item.Settings()
+                    .rarity(Rarity.RARE)
+                    .maxDamage(650)
+                    .component(DataComponentTypes.TOOL, AppleMace.createToolComponent())
+                    .attributeModifiers(AppleMace.createAttributeModifiers())
+                    .enchantable(2)
+                    .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
+
+    );
+    public static final Item PUFFERFISH_MACE = registerItem(
+            "pufferfish_mace",
+            PufferfishMace::new,
+            new Item.Settings()
+                    .rarity(Rarity.EPIC)
+                    .maxDamage(500)
+                    .component(DataComponentTypes.TOOL, PufferfishMace.createToolComponent())
+                    .attributeModifiers(PufferfishMace.createAttributeModifiers())
+                    .enchantable(2)
                     .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
 
     );
@@ -84,6 +129,8 @@ public class ModItems {
             fabricItemGroupEntries.add(WOODEN_MACE);
             fabricItemGroupEntries.add(UNFINISHED_MACE);
             fabricItemGroupEntries.add(GAMBLERS_MACE);
+            fabricItemGroupEntries.add(BRASS_BELL_MACE);
+            fabricItemGroupEntries.add(POTION_MACE);
         });
     }
 }
