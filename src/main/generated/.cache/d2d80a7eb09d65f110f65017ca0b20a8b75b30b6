@@ -1,2 +1,6 @@
 // 1.21.8	-999999999-01-01T00:00:00	Worse Maces/Tags for minecraft:item
-7059cd46a54324f53aa931a7f9992423f619447b data/minecraft/tags/item/enchantable/mace.json
+4d2f2c40205ff9e05eb98a2bdbef4908226c9bd0 data/minecraft/tags/item/breaks_decorated_pots.json
+4d2f2c40205ff9e05eb98a2bdbef4908226c9bd0 data/minecraft/tags/item/enchantable/durability.json
+4d2f2c40205ff9e05eb98a2bdbef4908226c9bd0 data/minecraft/tags/item/enchantable/fire_aspect.json
+db0061b760366b1671aec4a43317a6bca82ba9b0 data/minecraft/tags/item/enchantable/mace.json
+4d2f2c40205ff9e05eb98a2bdbef4908226c9bd0 data/minecraft/tags/item/enchantable/weapon.json

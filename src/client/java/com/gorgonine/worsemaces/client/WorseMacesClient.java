@@ -56,6 +56,17 @@ public class WorseMacesClient implements ClientModInitializer {
                 list.add(2,Text.translatable("item.worsemaces.pufferfish_mace.tooltip.1"));
                 list.add(3,Text.translatable("item.worsemaces.pufferfish_mace.tooltip.2"));
             }
+            if (itemStack.isOf(ModItems.TNT_MACE)) {
+                list.add(1,Text.literal(""));
+                list.add(2,Text.translatable("item.worsemaces.tnt_mace.tooltip.1"));
+                list.add(3,Text.translatable("item.worsemaces.tnt_mace.tooltip.2"));
+            }
+            if (itemStack.isOf(ModItems.COMMAND_BLOCK_MACE)) {
+                list.add(1,Text.literal(""));
+                list.add(2,Text.translatable("item.worsemaces.command_block_mace.tooltip.1"));
+                list.add(3,Text.translatable("item.worsemaces.command_block_mace.tooltip.2"));
+            }
+
 
 
         });

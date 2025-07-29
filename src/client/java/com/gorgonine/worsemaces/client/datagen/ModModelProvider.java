@@ -20,6 +20,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleState(ModBlocks.GAMBLERS_CORE);
         blockStateModelGenerator.registerSimpleState(ModBlocks.POTION_CORE);
         blockStateModelGenerator.registerSimpleState(ModBlocks.GROSS_CORE);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.TNT_CORE);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.COMMAND_BLOCK_CORE);
     }
 
     @Override
@@ -32,5 +34,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.GROSS_MACE, Models.HANDHELD_MACE);
         itemModelGenerator.register(ModItems.APPLE_MACE, Models.HANDHELD_MACE);
         itemModelGenerator.register(ModItems.PUFFERFISH_MACE, Models.HANDHELD_MACE);
+        itemModelGenerator.register(ModItems.TNT_MACE, Models.HANDHELD_MACE);
+        itemModelGenerator.register(ModItems.COMMAND_BLOCK_MACE, Models.HANDHELD_MACE);
     }
 }

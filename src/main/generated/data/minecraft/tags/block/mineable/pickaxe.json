@@ -2,6 +2,7 @@
   "values": [
     "worsemaces:unfinished_core",
     "worsemaces:gamblers_core",
-    "worsemaces:brass_bell_core"
+    "worsemaces:brass_bell_core",
+    "worsemaces:command_block_core"
   ]
 }

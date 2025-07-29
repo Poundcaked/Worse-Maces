@@ -1,9 +1,11 @@
 // 1.21.8	-999999999-01-01T00:00:00	Worse Maces/Block Loot Tables
 685ed7df8b4d37465cb19d162fee4d0c717e62b2 data/worsemaces/loot_table/blocks/apple_core.json
 7ffb1c4bb1ceecb89fca1fae5dd7133f228cb804 data/worsemaces/loot_table/blocks/brass_bell_core.json
+f3330017144332ff8f3067451efb84fe6c407621 data/worsemaces/loot_table/blocks/command_block_core.json
 365ae233ff5e53322bda7524569a90aa09427a74 data/worsemaces/loot_table/blocks/gamblers_core.json
 23db463632fbe398adf584719037197ae955f288 data/worsemaces/loot_table/blocks/gross_core.json
 e85a553dd7246710bb4fb0a900119363df41af08 data/worsemaces/loot_table/blocks/potion_core.json
 e9e99353b970764612a34260a6e820e3a383c05a data/worsemaces/loot_table/blocks/pufferfish_core.json
+6dd176371ebe997a175107b3ad08e3a801a31e18 data/worsemaces/loot_table/blocks/tnt_core.json
 6d518aa38bb25d4a8083c581901cd79da8a213bd data/worsemaces/loot_table/blocks/unfinished_core.json
 fd251a86ffc961dadc0da8d9eaf1730da8ded092 data/worsemaces/loot_table/blocks/wooden_core.json

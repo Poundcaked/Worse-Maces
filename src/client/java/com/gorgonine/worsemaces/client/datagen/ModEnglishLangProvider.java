@@ -21,6 +21,8 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.worsemaces.gross_mace", "Gross Mace");
         translationBuilder.add("item.worsemaces.apple_mace", "Apple Mace");
         translationBuilder.add("item.worsemaces.pufferfish_mace", "Pufferfish Mace");
+        translationBuilder.add("item.worsemaces.tnt_mace", "TNT Mace");
+        translationBuilder.add("item.worsemaces.command_block_mace", "Command Block Mace");
 
         translationBuilder.add("item.worsemaces.wooden_core", "Wooden Core");
         translationBuilder.add("item.worsemaces.unfinished_core", "Unfinished Core");
@@ -30,6 +32,8 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.worsemaces.gross_core", "Gross Core");
         translationBuilder.add("item.worsemaces.apple_core", "Apple Core");
         translationBuilder.add("item.worsemaces.pufferfish_core", "Pufferfish Core");
+        translationBuilder.add("item.worsemaces.tnt_core", "TNT Core");
+        translationBuilder.add("item.worsemaces.command_block_core", "Command Block Core");
 
         translationBuilder.add("itemgroup.worsemaces.maces_group", "Maces Group");
         translationBuilder.add("itemgroup.worsemaces.cores_group", "Core Group");
@@ -63,5 +67,11 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
 
         translationBuilder.add("item.worsemaces.pufferfish_mace.tooltip.1","Creates a cloud of poison when used in a smash attack");
         translationBuilder.add("item.worsemaces.pufferfish_mace.tooltip.2","Also poisons its target and nearby enemies");
+
+        translationBuilder.add("item.worsemaces.tnt_mace.tooltip.1","Right click on a block to launch upwards using tnt");
+        translationBuilder.add("item.worsemaces.tnt_mace.tooltip.2","Landing a smash spawns in TNT and killing an enemy with a smash spawns a giant explosion");
+
+        translationBuilder.add("item.worsemaces.command_block_mace.tooltip.1","Smash an enemy to run a random command");
+        translationBuilder.add("item.worsemaces.command_block_mace.tooltip.2","S");
     }
 }

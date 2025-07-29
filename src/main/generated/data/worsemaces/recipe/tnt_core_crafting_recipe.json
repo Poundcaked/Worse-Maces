@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "p": "minecraft:iron_pickaxe",
+    "W": "minecraft:tnt",
     "s": "minecraft:heavy_core"
   },
   "pattern": [
-    "ppp",
-    "psp",
-    "ppp"
+    "WWW",
+    "WsW",
+    "WWW"
   ],
   "result": {
     "count": 1,
-    "id": "worsemaces:unfinished_core"
+    "id": "worsemaces:tnt_core"
   }
 }

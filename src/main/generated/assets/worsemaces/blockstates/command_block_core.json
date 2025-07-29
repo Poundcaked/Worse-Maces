@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "worsemaces:block/command_block_core"
+    }
+  }
+}

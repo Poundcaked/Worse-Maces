@@ -1,6 +1,7 @@
 package com.gorgonine.worsemaces;
 
 import com.gorgonine.worsemaces.block.BronzeBellCore;
+import com.gorgonine.worsemaces.block.TNTCore;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
@@ -104,6 +105,26 @@ public class ModBlocks {
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.WHITE)
                     .sounds(BlockSoundGroup.WET_SPONGE),
+            true
+    );
+    public static final Block TNT_CORE = register(
+            "tnt_core",
+            TNTCore::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.BRIGHT_RED)
+                    .breakInstantly()
+                    .sounds(BlockSoundGroup.GRASS)
+                    .burnable()
+                    .solidBlock(Blocks::never),
+            true
+    );
+    public static final Block COMMAND_BLOCK_CORE = register(
+            "command_block_core",
+            HeavyCoreBlock::new,
+            AbstractBlock.Settings.create()
+                .mapColor(MapColor.BROWN)
+                .requiresTool()
+                .strength(100.0F, 2400.0F),
             true
     );
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

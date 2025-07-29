@@ -1,54 +1,49 @@
 package com.gorgonine.worsemaces.item;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.decoration.ArmorStandEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class GrossMace extends Item {
-    private static int ATTACK_DAMAGE_MODIFIER_VALUE = 2;
-    private static float ATTACK_SPEED_MODIFIER_VALUE = -2.9F;
+public class CommandBlockMace extends Item {
+    private static int ATTACK_DAMAGE_MODIFIER_VALUE = 5;
+    private static float ATTACK_SPEED_MODIFIER_VALUE = -3.4F;
     private static float HEAVY_SMASH_SOUND_FALL_DISTANCE_THRESHOLD = 5.0F;
-    public static  float KNOCKBACK_RANGE = 4.5F;
-    private static float KNOCKBACK_POWER = 1F;
+    public static  float KNOCKBACK_RANGE = 3.5F;
+    private static float KNOCKBACK_POWER = 0.7F;
     private static double ABSOLUTE_MINIMUM_FALL_DISTANCE = 1.5F;
     private static double MAX_MIN_FALL_DISTANCE = 3.0F;
     private static  double MIDDLE_FALL_DISTANCE = 8.0F;
 
     Random random = new Random();
 
-    public GrossMace(Settings settings) {
+    public CommandBlockMace(Settings settings) {
         super(settings);
     }
 
@@ -74,45 +69,36 @@ public class GrossMace extends Item {
         return new ToolComponent(List.of(), 1.0F, 2, false);
     }
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        BlockPos originPos = context.getBlockPos().add(-1,0,-1);
-        for(int i = 0; i < 3; i ++){
-            for(int j = 0; j < 3; j++){
-                if(!context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.AIR) && !context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.SLIME_BLOCK)){
-                    context.getWorld().setBlockState(originPos.add(i,0,j), Blocks.SLIME_BLOCK.getDefaultState());
-                    context.getWorld().playSound(null,context.getBlockPos(),SoundEvents.BLOCK_SLIME_BLOCK_PLACE, SoundCategory.BLOCKS,1.0F, random.nextFloat(1.8F));
-                    if(!context.getPlayer().isInCreativeMode()){
-                        ItemStack itemStack = context.getPlayer().getStackInHand(context.getHand());
-                        itemStack.damage(1,context.getPlayer());
-                    }
-
-                }
-
-            }
-        }
-
-        return ActionResult.SUCCESS;
-    }
-
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        var oozing = new StatusEffectInstance(StatusEffects.OOZING, 15 * 20, 1, false, true, true); //get oozing
-        target.addStatusEffect(oozing);
-
-
-
         if (shouldDealAdditionalDamage(attacker)) {
 
-            if (random.nextInt(100) < 25){
-                for(int i = 0; i < random.nextInt(4); i++){
-                    SlimeEntity slime = new SlimeEntity(EntityType.SLIME, target.getWorld());
-                    target.getWorld().spawnEntity(slime);
-                    slime.setPos(target.getX(),target.getY(),target.getZ());
-                    slime.setVelocity(random.nextDouble(-1,1),random.nextDouble(0,1),random.nextDouble(-1,1));
-                    slime.setSize(2, true);
-                    slime.setDespawnCounter(30*20);
-                }
-            }
+            String[] commands = {
+                    "execute at @r run summon hoglin",
+                    "give @a stick 2",
+                    "title @a title \"Plob!!!\"",
+                    "tellraw @a {\"color\":\"yellow\",\"text\":\"Pisrats joined the game\"}",
+                    "tellraw @a \"<Creeper> stop the killings brah\"",
+                    "rotate @r facing entity @e[sort=random,limit=1]",
+                    "execute at @a run summon lightning_bolt",
+                    "kill @e[sort=random,limit=1]",
+                    "say \"Pisrat is banned\"",
+                    "tick sprint 1000",
+                    "tellraw @a {\"text\":\"steve_buildingyt whispers to you: i love crosshair x\",\"italic\":true,\"color\":\"gray\"}",
+                    "give @r written_book{pages:['{\"text\":\"Who here smells?\\\\n\\\\nRead Page 52 for the answer\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\nI don\\'t know\"}','{\"text\":\"Brah passed\"}'],title:\"INFO.. IMPORTANT!\",author:Notch}",
+                    "place structure minecraft:village_taiga",
+                    "execute at @r run fill ~2 ~2 ~2 ~-2 ~-2 ~-2 glass",
+                    "execute at @a run playsound minecraft:entity.wither.death master @a ~ ~ ~",
+                    "execute at @r run clone ~-10 ~-10 ~-10 ~10 ~10 ~10 ~-10 ~11 ~-10",
+                    "execute at @r run summon bogged ~ ~ ~ {NoAI:1b,PersistenceRequired:1b,Silent:1b,active_effects:[{id:resistance,duration:9999999,amplifier:5,show_particles:0b}]}",
+                    "execute at @r run fill ~5 ~-1 ~5 ~-5 ~-1 ~-5 minecraft:dried_ghast",
+                    "title @a title {\"text\":\"\\ud83d\\ude28 Behind you!\",\"bold\":true,\"color\":\"dark_red\"}"
+            };
+
+            String command = commands[random.nextInt(commands.length)];
+            PlayerEntity player = (PlayerEntity) attacker;
+            CommandManager commandManager = Objects.requireNonNull(player.getServer()).getCommandManager();
+            ServerCommandSource commandSource = player.getServer().getCommandSource();
+            commandManager.executeWithPrefix(commandSource, command);
 
             ServerWorld serverWorld = (ServerWorld)attacker.getWorld();
             attacker.setVelocity(attacker.getVelocity().withAxis(Direction.Axis.Y, 0.009999999776482582));
@@ -130,24 +116,13 @@ public class GrossMace extends Item {
                     serverPlayerEntity.setSpawnExtraParticlesOnFall(true);
                 }
 
-                SoundEvent soundEvent = attacker.fallDistance > HEAVY_SMASH_SOUND_FALL_DISTANCE_THRESHOLD ? SoundEvents.BLOCK_SLIME_BLOCK_BREAK : SoundEvents.BLOCK_SLIME_BLOCK_PLACE;
+                SoundEvent soundEvent = attacker.fallDistance > HEAVY_SMASH_SOUND_FALL_DISTANCE_THRESHOLD ? SoundEvents.ITEM_MACE_SMASH_GROUND_HEAVY : SoundEvents.ITEM_MACE_SMASH_GROUND;
                 serverWorld.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), soundEvent, attacker.getSoundCategory(), 1.0F, 1.0F);
             } else {
-                serverWorld.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_HONEY_BLOCK_BREAK, attacker.getSoundCategory(), 1.0F, 1.0F);
+                serverWorld.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.ITEM_MACE_SMASH_AIR, attacker.getSoundCategory(), 1.0F, 1.0F);
             }
 
             knockbackNearbyEntities(serverWorld, attacker, target);
-
-            if(!target.isAlive()){
-                for(int i = 0; i < random.nextInt(4); i++){
-                    SlimeEntity slime = new SlimeEntity(EntityType.SLIME, target.getWorld());
-                    target.getWorld().spawnEntity(slime);
-                    slime.setPos(target.getX(),target.getY(),target.getZ());
-                    slime.setVelocity(random.nextDouble(-1,1),random.nextDouble(0,1),random.nextDouble(-1,1));
-                    slime.setSize(2, true);
-                    slime.setDespawnCounter(30*20);
-                }
-            }
         }
 
     }
@@ -160,17 +135,18 @@ public class GrossMace extends Item {
         if (shouldDealAdditionalDamage(attacker)) {
             attacker.onLanding();
         }
+
     }
 
 
     public double getFormulaMinimum(double playerFallDistance){
-        return 1.5 * playerFallDistance;
+        return 4.0 * playerFallDistance;
     }
     public double getFormulaMiddle(double playerFallDistance){
-        return 6.0 + 1.5 * (playerFallDistance - MAX_MIN_FALL_DISTANCE);
+        return 12.0 + 2.0 * (playerFallDistance - MAX_MIN_FALL_DISTANCE);
     }
     public double getFormulaMax(double playerFallDistance){
-        return 18.0 + playerFallDistance - MIDDLE_FALL_DISTANCE;
+        return 22.0 + playerFallDistance - MIDDLE_FALL_DISTANCE;
     }
 
     public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
@@ -179,7 +155,6 @@ public class GrossMace extends Item {
             if (!shouldDealAdditionalDamage(player)) {
                 return 0.0F;
             } else {
-
                 double playerFallDistance = player.fallDistance;
                 double calculatedFallDamage;
                 if (playerFallDistance <= MAX_MIN_FALL_DISTANCE) {

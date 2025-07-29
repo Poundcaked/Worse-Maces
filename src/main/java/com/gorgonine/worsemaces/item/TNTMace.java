@@ -1,6 +1,5 @@
 package com.gorgonine.worsemaces.item;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
@@ -8,21 +7,25 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -30,25 +33,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.AdvancedExplosionBehavior;
+import net.minecraft.world.explosion.Explosion;
+import net.minecraft.world.explosion.ExplosionBehavior;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class GrossMace extends Item {
-    private static int ATTACK_DAMAGE_MODIFIER_VALUE = 2;
-    private static float ATTACK_SPEED_MODIFIER_VALUE = -2.9F;
+public class TNTMace extends Item {
+    private static int ATTACK_DAMAGE_MODIFIER_VALUE = 5;
+    private static float ATTACK_SPEED_MODIFIER_VALUE = -3.4F;
     private static float HEAVY_SMASH_SOUND_FALL_DISTANCE_THRESHOLD = 5.0F;
     public static  float KNOCKBACK_RANGE = 4.5F;
-    private static float KNOCKBACK_POWER = 1F;
+    private static float KNOCKBACK_POWER = 2.5F;
     private static double ABSOLUTE_MINIMUM_FALL_DISTANCE = 1.5F;
     private static double MAX_MIN_FALL_DISTANCE = 3.0F;
     private static  double MIDDLE_FALL_DISTANCE = 8.0F;
 
-    Random random = new Random();
-
-    public GrossMace(Settings settings) {
+    public TNTMace(Settings settings) {
         super(settings);
     }
 
@@ -74,53 +79,22 @@ public class GrossMace extends Item {
         return new ToolComponent(List.of(), 1.0F, 2, false);
     }
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        BlockPos originPos = context.getBlockPos().add(-1,0,-1);
-        for(int i = 0; i < 3; i ++){
-            for(int j = 0; j < 3; j++){
-                if(!context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.AIR) && !context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.SLIME_BLOCK)){
-                    context.getWorld().setBlockState(originPos.add(i,0,j), Blocks.SLIME_BLOCK.getDefaultState());
-                    context.getWorld().playSound(null,context.getBlockPos(),SoundEvents.BLOCK_SLIME_BLOCK_PLACE, SoundCategory.BLOCKS,1.0F, random.nextFloat(1.8F));
-                    if(!context.getPlayer().isInCreativeMode()){
-                        ItemStack itemStack = context.getPlayer().getStackInHand(context.getHand());
-                        itemStack.damage(1,context.getPlayer());
-                    }
-
-                }
-
-            }
-        }
-
-        return ActionResult.SUCCESS;
-    }
-
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        var oozing = new StatusEffectInstance(StatusEffects.OOZING, 15 * 20, 1, false, true, true); //get oozing
-        target.addStatusEffect(oozing);
-
-
-
         if (shouldDealAdditionalDamage(attacker)) {
-
-            if (random.nextInt(100) < 25){
-                for(int i = 0; i < random.nextInt(4); i++){
-                    SlimeEntity slime = new SlimeEntity(EntityType.SLIME, target.getWorld());
-                    target.getWorld().spawnEntity(slime);
-                    slime.setPos(target.getX(),target.getY(),target.getZ());
-                    slime.setVelocity(random.nextDouble(-1,1),random.nextDouble(0,1),random.nextDouble(-1,1));
-                    slime.setSize(2, true);
-                    slime.setDespawnCounter(30*20);
-                }
-            }
-
             ServerWorld serverWorld = (ServerWorld)attacker.getWorld();
+
+            TntEntity tnt = new TntEntity(EntityType.TNT,serverWorld);
+            serverWorld.spawnEntity(tnt);
+            tnt.setPosition(target.getPos());
+            tnt.setFuse(30);
+            tnt.setVelocity(0,0.1,0);
+
             attacker.setVelocity(attacker.getVelocity().withAxis(Direction.Axis.Y, 0.009999999776482582));
+            attacker.fallDistance = 0;
             ServerPlayerEntity serverPlayerEntity;
             if (attacker instanceof ServerPlayerEntity) {
                 serverPlayerEntity = (ServerPlayerEntity)attacker;
                 serverPlayerEntity.currentExplosionImpactPos = this.getCurrentExplosionImpactPos(serverPlayerEntity);
-                serverPlayerEntity.setIgnoreFallDamageFromCurrentExplosion(true);
                 serverPlayerEntity.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(serverPlayerEntity));
             }
 
@@ -129,48 +103,84 @@ public class GrossMace extends Item {
                     serverPlayerEntity = (ServerPlayerEntity)attacker;
                     serverPlayerEntity.setSpawnExtraParticlesOnFall(true);
                 }
-
-                SoundEvent soundEvent = attacker.fallDistance > HEAVY_SMASH_SOUND_FALL_DISTANCE_THRESHOLD ? SoundEvents.BLOCK_SLIME_BLOCK_BREAK : SoundEvents.BLOCK_SLIME_BLOCK_PLACE;
-                serverWorld.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), soundEvent, attacker.getSoundCategory(), 1.0F, 1.0F);
+                serverWorld.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, attacker.getSoundCategory(), 1.0F, 1.0F);
             } else {
-                serverWorld.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.BLOCK_HONEY_BLOCK_BREAK, attacker.getSoundCategory(), 1.0F, 1.0F);
+                serverWorld.playSound((Entity)null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.ENTITY_TNT_PRIMED, attacker.getSoundCategory(), 1.0F, 1.0F);
             }
 
             knockbackNearbyEntities(serverWorld, attacker, target);
 
             if(!target.isAlive()){
-                for(int i = 0; i < random.nextInt(4); i++){
-                    SlimeEntity slime = new SlimeEntity(EntityType.SLIME, target.getWorld());
-                    target.getWorld().spawnEntity(slime);
-                    slime.setPos(target.getX(),target.getY(),target.getZ());
-                    slime.setVelocity(random.nextDouble(-1,1),random.nextDouble(0,1),random.nextDouble(-1,1));
-                    slime.setSize(2, true);
-                    slime.setDespawnCounter(30*20);
-                }
+                StatusEffectInstance resistance = new StatusEffectInstance(StatusEffects.RESISTANCE,5,4,false,true,true);
+                attacker.addStatusEffect(resistance);
+                serverWorld.createExplosion(
+                        null,
+                        null,
+                        new ExplosionBehavior(),
+                        target.getX(),
+                        target.getY(),
+                        target.getZ(),
+                        80F,
+                        false,
+                        World.ExplosionSourceType.TNT,
+                        ParticleTypes.EXPLOSION,
+                        ParticleTypes.EXPLOSION,
+                        SoundEvents.ENTITY_GENERIC_EXPLODE
+                );
             }
         }
 
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        World world = context.getWorld();
+
+        final ExplosionBehavior EXPLOSION_BEHAVIOR = new AdvancedExplosionBehavior(
+                true, false, Optional.of(1.22F), Registries.BLOCK.getOptional(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity())
+        );
+
+        if(!world.isClient){
+            ItemCooldownManager itemCooldownManager = context.getPlayer().getItemCooldownManager();
+
+            world.createExplosion(
+                    null,
+                    null,
+                    EXPLOSION_BEHAVIOR,
+                    context.getBlockPos().getX(),
+                    (context.getBlockPos().getY()) + 1,
+                    context.getBlockPos().getZ(),
+                    22.2F,
+                    false,
+                    World.ExplosionSourceType.TRIGGER,
+                    ParticleTypes.EXPLOSION,
+                    ParticleTypes.EXPLOSION,
+                    SoundEvents.ENTITY_GENERIC_EXPLODE
+            );
+
+            if(!context.getPlayer().isInCreativeMode()){
+                ItemStack itemStack = context.getPlayer().getStackInHand(context.getHand());
+                itemStack.damage(1,context.getPlayer());
+            }
+            itemCooldownManager.set(context.getStack(),30);
+        }
+
+
+        return ActionResult.SUCCESS;
     }
 
     Vec3d getCurrentExplosionImpactPos(ServerPlayerEntity player) {
         return player.shouldIgnoreFallDamageFromCurrentExplosion() && player.currentExplosionImpactPos != null && player.currentExplosionImpactPos.y <= player.getPos().y ? player.currentExplosionImpactPos : player.getPos();
     }
 
-    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (shouldDealAdditionalDamage(attacker)) {
-            attacker.onLanding();
-        }
-    }
-
-
     public double getFormulaMinimum(double playerFallDistance){
-        return 1.5 * playerFallDistance;
+        return 2.0 * playerFallDistance;
     }
     public double getFormulaMiddle(double playerFallDistance){
-        return 6.0 + 1.5 * (playerFallDistance - MAX_MIN_FALL_DISTANCE);
+        return 10.0 + 1.8 * (playerFallDistance - MAX_MIN_FALL_DISTANCE);
     }
     public double getFormulaMax(double playerFallDistance){
-        return 18.0 + playerFallDistance - MIDDLE_FALL_DISTANCE;
+        return 20.0 + playerFallDistance - MIDDLE_FALL_DISTANCE;
     }
 
     public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {

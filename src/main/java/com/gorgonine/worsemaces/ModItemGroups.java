@@ -22,6 +22,8 @@ public class ModItemGroups {
                         entries.add(ModItems.GROSS_MACE);
                         entries.add(ModItems.APPLE_MACE);
                         entries.add(ModItems.PUFFERFISH_MACE);
+                        entries.add(ModItems.TNT_MACE);
+                        entries.add(ModItems.COMMAND_BLOCK_MACE);
                     }).build());
 
     public static final ItemGroup CORES_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -37,6 +39,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GROSS_CORE);
                         entries.add(ModBlocks.APPLE_CORE);
                         entries.add(ModBlocks.PUFFERFISH_CORE);
+                        entries.add(ModBlocks.TNT_CORE);
+                        entries.add(ModBlocks.COMMAND_BLOCK_CORE);
                     }).build());
 
 

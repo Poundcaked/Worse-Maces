@@ -19,6 +19,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         valueLookupBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.UNFINISHED_CORE)
                 .add(ModBlocks.GAMBLERS_CORE)
-                .add(ModBlocks.BRASS_BELL_CORE);
+                .add(ModBlocks.BRASS_BELL_CORE)
+                .add(ModBlocks.COMMAND_BLOCK_CORE);
     }
 }

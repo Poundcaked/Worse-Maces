@@ -115,6 +115,31 @@ public class ModItems {
                     .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
 
     );
+    public static final Item TNT_MACE = registerItem(
+            "tnt_mace",
+            TNTMace::new,
+            new Item.Settings()
+                    .rarity(Rarity.EPIC)
+                    .maxDamage(750)
+                    .component(DataComponentTypes.TOOL, TNTMace.createToolComponent())
+                    .attributeModifiers(TNTMace.createAttributeModifiers())
+                    .enchantable(10)
+                    .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
+
+    );
+    public static final Item COMMAND_BLOCK_MACE = registerItem(
+            "command_block_mace",
+            CommandBlockMace::new,
+            new Item.Settings()
+                    .rarity(Rarity.RARE)
+                    .fireproof()
+                    .maxDamage(3000)
+                    .component(DataComponentTypes.TOOL, CommandBlockMace.createToolComponent())
+                    .attributeModifiers(CommandBlockMace.createAttributeModifiers())
+                    .enchantable(30)
+                    .component(DataComponentTypes.WEAPON, new WeaponComponent(1))
+
+    );
 
     public static Item registerItem(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(WorseMaces.MOD_ID, name));
