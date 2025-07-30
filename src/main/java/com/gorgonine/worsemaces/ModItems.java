@@ -33,7 +33,7 @@ public class ModItems {
             "unfinished_mace",
             UnfinishedMace::new,
             new Item.Settings()
-                    .rarity(Rarity.EPIC)
+                    .rarity(Rarity.RARE)
                     .maxDamage(250)
                     .component(DataComponentTypes.TOOL, UnfinishedMace.createToolComponent())
                     .attributeModifiers(UnfinishedMace.createAttributeModifiers())
@@ -46,7 +46,7 @@ public class ModItems {
             "gamblers_mace",
             GamblersMace::new,
             new Item.Settings()
-                    .rarity(Rarity.EPIC)
+                    .rarity(Rarity.RARE)
                     .maxDamage(500)
                     .component(DataComponentTypes.TOOL, GamblersMace.createToolComponent())
                     .attributeModifiers(GamblersMace.createAttributeModifiers())
@@ -59,7 +59,7 @@ public class ModItems {
             "brass_bell_mace",
             BrassBellMace::new,
             new Item.Settings()
-                    .rarity(Rarity.EPIC)
+                    .rarity(Rarity.RARE)
                     .maxDamage(750)
                     .component(DataComponentTypes.TOOL, BrassBellMace.createToolComponent())
                     .attributeModifiers(BrassBellMace.createAttributeModifiers())
@@ -71,7 +71,7 @@ public class ModItems {
             "potion_mace",
             PotionMace::new,
             new Item.Settings()
-                    .rarity(Rarity.EPIC)
+                    .rarity(Rarity.RARE)
                     .maxDamage(400)
                     .component(DataComponentTypes.TOOL, PotionMace.createToolComponent())
                     .attributeModifiers(PotionMace.createAttributeModifiers())
@@ -95,7 +95,7 @@ public class ModItems {
             "apple_mace",
             AppleMace::new,
             new Item.Settings()
-                    .rarity(Rarity.RARE)
+                    .rarity(Rarity.EPIC)
                     .maxDamage(650)
                     .component(DataComponentTypes.TOOL, AppleMace.createToolComponent())
                     .attributeModifiers(AppleMace.createAttributeModifiers())
@@ -131,7 +131,7 @@ public class ModItems {
             "command_block_mace",
             CommandBlockMace::new,
             new Item.Settings()
-                    .rarity(Rarity.RARE)
+                    .rarity(Rarity.EPIC)
                     .fireproof()
                     .maxDamage(3000)
                     .component(DataComponentTypes.TOOL, CommandBlockMace.createToolComponent())
@@ -156,6 +156,11 @@ public class ModItems {
             fabricItemGroupEntries.add(GAMBLERS_MACE);
             fabricItemGroupEntries.add(BRASS_BELL_MACE);
             fabricItemGroupEntries.add(POTION_MACE);
+            fabricItemGroupEntries.add(GROSS_MACE);
+            fabricItemGroupEntries.add(APPLE_MACE);
+            fabricItemGroupEntries.add(PUFFERFISH_MACE);
+            fabricItemGroupEntries.add(TNT_MACE);
+            fabricItemGroupEntries.add(COMMAND_BLOCK_MACE);
         });
     }
 }

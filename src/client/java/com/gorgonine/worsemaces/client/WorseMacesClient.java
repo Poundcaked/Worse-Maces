@@ -65,6 +65,7 @@ public class WorseMacesClient implements ClientModInitializer {
                 list.add(1,Text.literal(""));
                 list.add(2,Text.translatable("item.worsemaces.command_block_mace.tooltip.1"));
                 list.add(3,Text.translatable("item.worsemaces.command_block_mace.tooltip.2"));
+                list.add(3,Text.translatable("item.worsemaces.command_block_mace.tooltip.3"));
             }
 
 

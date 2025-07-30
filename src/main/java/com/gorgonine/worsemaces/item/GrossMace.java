@@ -37,6 +37,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 public class GrossMace extends Item {
+    private static final float SHAKE_RANGE = 5.5F;
     private static int ATTACK_DAMAGE_MODIFIER_VALUE = 2;
     private static float ATTACK_SPEED_MODIFIER_VALUE = -2.9F;
     private static float HEAVY_SMASH_SOUND_FALL_DISTANCE_THRESHOLD = 5.0F;

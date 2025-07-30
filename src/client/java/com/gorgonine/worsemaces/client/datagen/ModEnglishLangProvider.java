@@ -72,6 +72,7 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.worsemaces.tnt_mace.tooltip.2","Landing a smash spawns in TNT and killing an enemy with a smash spawns a giant explosion");
 
         translationBuilder.add("item.worsemaces.command_block_mace.tooltip.1","Smash an enemy to run a random command");
-        translationBuilder.add("item.worsemaces.command_block_mace.tooltip.2","S");
+        translationBuilder.add("item.worsemaces.command_block_mace.tooltip.2","Right click a block to place a random block");
+        translationBuilder.add("item.worsemaces.command_block_mace.tooltip.3","Right click the air to launch a random mob");
     }
 }

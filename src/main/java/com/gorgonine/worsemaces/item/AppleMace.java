@@ -1,6 +1,12 @@
 package com.gorgonine.worsemaces.item;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SaplingGenerator;
+import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
@@ -18,18 +24,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
-import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraft.world.chunk.ChunkManager;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.stateprovider.BlockStateProviderType;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
+import net.minecraft.world.gen.trunk.TrunkPlacer;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -45,6 +62,8 @@ public class AppleMace extends Item {
     private static double ABSOLUTE_MINIMUM_FALL_DISTANCE = 1.5F;
     private static double MAX_MIN_FALL_DISTANCE = 3.0F;
     private static  double MIDDLE_FALL_DISTANCE = 8.0F;
+
+    private static final SimpleCommandExceptionType FEATURE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.place.feature.failed"));
 
     public AppleMace(Settings settings) {
         super(settings);
@@ -110,44 +129,51 @@ public class AppleMace extends Item {
 
             knockbackNearbyEntities(serverWorld, attacker, target);
         }
-        if(!target.isAlive() && !target.isPlayer()){
+        if(!target.isAlive()){
             World world = attacker.getWorld();
-
-            for(int i = 0; i < 2; i++){ //placing 5x5
-                for(int j = 0; j < 5; j++){
-                    for(int k = 0; k < 5; k++){
-                        world.setBlockState(target.getBlockPos().add(0,4+i,0).west().west().north().north().add(j,0,k),Blocks.OAK_LEAVES.getDefaultState());
-                    }
-                }
-            }
-
-            for(int i = 0; i < 3; i ++){ //placing 3x3
-                for(int j = 0; j < 3; j++){
-                    for(int k = 0; k < 2; k++){
-                        world.setBlockState(target.getBlockPos().add(0,6+k,0).west().north().add(i,0,j),Blocks.OAK_LEAVES.getDefaultState());
-                    }
-                }
-            }
-            //top 2 3x3 layers of leaves TRIM
-            world.setBlockState(target.getBlockPos().add(0,7,0).west().north(),Blocks.AIR.getDefaultState());          //
-            world.setBlockState(target.getBlockPos().add(0,7,0).west().south(),Blocks.AIR.getDefaultState());        //////
-            world.setBlockState(target.getBlockPos().add(0,7,0).east().north(),Blocks.AIR.getDefaultState());          //
-            world.setBlockState(target.getBlockPos().add(0,7,0).east().south(),Blocks.AIR.getDefaultState());
-
-            world.setBlockState(target.getBlockPos().add(0,6,0).west().north(),Blocks.AIR.getDefaultState());          //
-            world.setBlockState(target.getBlockPos().add(0,6,0).east().north(),Blocks.AIR.getDefaultState());        //////
-            world.setBlockState(target.getBlockPos().add(0,6,0).east().south(),Blocks.AIR.getDefaultState());        ////
-            //bottom 2 5x5 layers of leaves TRIM
-            world.setBlockState(target.getBlockPos().add(0,5,0).east().south().east().south(),Blocks.AIR.getDefaultState());        //////////             //////
-            world.setBlockState(target.getBlockPos().add(0,4,0).west().west().north().north(),Blocks.AIR.getDefaultState());        //////////           //////////
-            world.setBlockState(target.getBlockPos().add(0,4,0).east().north().east().north(),Blocks.AIR.getDefaultState());        //////////           //////////
-            world.setBlockState(target.getBlockPos().add(0,4,0).east().south().east().south(),Blocks.AIR.getDefaultState());        //////////           ////////
-                                                                                                                                            ////////
-            for(int i = 0; i< 6; i++){ //placing logs
-                world.setBlockState(target.getBlockPos().add(0,i,0), Blocks.OAK_LOG.getDefaultState());
+            ServerWorld serverWorld = (ServerWorld) world;
+            if(!SaplingGenerator.OAK.generate(serverWorld,serverWorld.getChunkManager().getChunkGenerator(),target.getBlockPos(), Blocks.OAK_SAPLING.getDefaultState(), net.minecraft.util.math.random.Random.create())){
+                placeTree(serverWorld, Blocks.OAK_LOG, Blocks.OAK_LEAVES, target);
             }
         }
 
+    }
+
+
+    private void placeTree(World world, Block log, Block leaves, LivingEntity target){
+        for(int i = 0; i < 2; i++){ //placing 5x5
+            for(int j = 0; j < 5; j++){
+                for(int k = 0; k < 5; k++){
+                    world.setBlockState(target.getBlockPos().add(0,4+i,0).west().west().north().north().add(j,0,k),leaves.getDefaultState());
+                }
+            }
+        }
+
+        for(int i = 0; i < 3; i ++){ //placing 3x3
+            for(int j = 0; j < 3; j++){
+                for(int k = 0; k < 2; k++){
+                    world.setBlockState(target.getBlockPos().add(0,6+k,0).west().north().add(i,0,j),leaves.getDefaultState());
+                }
+            }
+        }
+        //top 2 3x3 layers of leaves TRIM
+        world.setBlockState(target.getBlockPos().add(0,7,0).west().north(),Blocks.AIR.getDefaultState());          //
+        world.setBlockState(target.getBlockPos().add(0,7,0).west().south(),Blocks.AIR.getDefaultState());        //////
+        world.setBlockState(target.getBlockPos().add(0,7,0).east().north(),Blocks.AIR.getDefaultState());          //
+        world.setBlockState(target.getBlockPos().add(0,7,0).east().south(),Blocks.AIR.getDefaultState());
+
+        world.setBlockState(target.getBlockPos().add(0,6,0).west().north(),Blocks.AIR.getDefaultState());          //
+        world.setBlockState(target.getBlockPos().add(0,6,0).east().north(),Blocks.AIR.getDefaultState());        //////
+        world.setBlockState(target.getBlockPos().add(0,6,0).east().south(),Blocks.AIR.getDefaultState());        ////
+        //bottom 2 5x5 layers of leaves TRIM
+        world.setBlockState(target.getBlockPos().add(0,5,0).east().south().east().south(),Blocks.AIR.getDefaultState());        //////////             //////
+        world.setBlockState(target.getBlockPos().add(0,4,0).west().west().north().north(),Blocks.AIR.getDefaultState());        //////////           //////////
+        world.setBlockState(target.getBlockPos().add(0,4,0).east().north().east().north(),Blocks.AIR.getDefaultState());        //////////           //////////
+        world.setBlockState(target.getBlockPos().add(0,4,0).east().south().east().south(),Blocks.AIR.getDefaultState());        //////////           ////////
+        ////////
+        for(int i = 0; i< 6; i++){ //placing logs
+            world.setBlockState(target.getBlockPos().add(0,i,0), log.getDefaultState());
+        }
     }
 
     Vec3d getCurrentExplosionImpactPos(ServerPlayerEntity player) {
