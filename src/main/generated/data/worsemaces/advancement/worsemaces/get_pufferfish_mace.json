@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_apple_mace",
+  "criteria": {
+    "get_pufferfish_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:pufferfish_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.pufferfish_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:pufferfish_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.pufferfish_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_pufferfish_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,5 +1,6 @@
 package com.gorgonine.worsemaces.item;
 
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
@@ -17,9 +18,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
@@ -29,6 +29,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -132,41 +133,51 @@ public class TNTMace extends Item {
 
     }
 
+    private static boolean shouldCancelRightClickAttempt(PlayerEntity playerEntity) {
+        return     playerEntity.getOffHandStack().contains(DataComponentTypes.CAN_PLACE_ON)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.EQUIPPABLE)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.BLOCKS_ATTACKS)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.CONSUMABLE)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.BLOCK_STATE)
+                || playerEntity.getOffHandStack().getItem() instanceof BlockItem
+                || playerEntity.getOffHandStack().isOf(Items.WIND_CHARGE);
+    }
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
+        if(shouldCancelRightClickAttempt(context.getPlayer())){
+            return ActionResult.PASS;
+        }else{
+            World world = context.getWorld();
 
-        final ExplosionBehavior EXPLOSION_BEHAVIOR = new AdvancedExplosionBehavior(
-                true, false, Optional.of(1.22F), Registries.BLOCK.getOptional(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity())
-        );
-
-        if(!world.isClient){
-            ItemCooldownManager itemCooldownManager = context.getPlayer().getItemCooldownManager();
-
-            world.createExplosion(
-                    null,
-                    null,
-                    EXPLOSION_BEHAVIOR,
-                    context.getBlockPos().getX(),
-                    (context.getBlockPos().getY()) + 1,
-                    context.getBlockPos().getZ(),
-                    22.2F,
-                    false,
-                    World.ExplosionSourceType.TRIGGER,
-                    ParticleTypes.EXPLOSION,
-                    ParticleTypes.EXPLOSION,
-                    SoundEvents.ENTITY_GENERIC_EXPLODE
+            final ExplosionBehavior EXPLOSION_BEHAVIOR = new AdvancedExplosionBehavior(
+                    true, false, Optional.of(1.22F), Registries.BLOCK.getOptional(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity())
             );
+            if(!world.isClient){
+                ItemCooldownManager itemCooldownManager = context.getPlayer().getItemCooldownManager();
 
-            if(!context.getPlayer().isInCreativeMode()){
-                ItemStack itemStack = context.getPlayer().getStackInHand(context.getHand());
-                itemStack.damage(1,context.getPlayer());
+                world.createExplosion(
+                        null,
+                        null,
+                        EXPLOSION_BEHAVIOR,
+                        context.getBlockPos().getX(),
+                        (context.getBlockPos().getY()) + 1,
+                        context.getBlockPos().getZ(),
+                        22.2F,
+                        false,
+                        World.ExplosionSourceType.TRIGGER,
+                        ParticleTypes.EXPLOSION,
+                        ParticleTypes.EXPLOSION,
+                        SoundEvents.ENTITY_GENERIC_EXPLODE
+                );
+                if(!context.getPlayer().isInCreativeMode()){
+                    ItemStack itemStack = context.getPlayer().getStackInHand(context.getHand());
+                    itemStack.damage(1,context.getPlayer());
+                }
+                itemCooldownManager.set(context.getStack(),30);
             }
-            itemCooldownManager.set(context.getStack(),30);
+            return ActionResult.SUCCESS;
         }
-
-
-        return ActionResult.SUCCESS;
     }
 
     Vec3d getCurrentExplosionImpactPos(ServerPlayerEntity player) {

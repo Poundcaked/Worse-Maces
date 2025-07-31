@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "root": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "worsemaces:gui/advancements/backgrounds/mace",
+    "description": {
+      "translate": "advancement.worsemaces.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:mace"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.worsemaces.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "root"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,14 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
     "C": "worsemaces:command_block_core",
-    "s": "minecraft:stick"
+    "d": "minecraft:diamond",
+    "i": "minecraft:iron_ingot"
   },
   "pattern": [
     " C ",
-    " s ",
-    "   "
+    " i ",
+    " d "
   ],
   "result": {
     "count": 1,

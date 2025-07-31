@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_tnt_mace",
+  "criteria": {
+    "get_command_block_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:command_block_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.command_block_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:command_block_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.command_block_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_command_block_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

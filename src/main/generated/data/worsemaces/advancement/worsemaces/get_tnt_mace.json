@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_pufferfish_mace",
+  "criteria": {
+    "get_tnt_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:tnt_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.tnt_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:tnt_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.tnt_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_tnt_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -70,12 +70,11 @@ public class PufferfishMace extends Item {
     }
 
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        var poison = new StatusEffectInstance(StatusEffects.POISON, 6 * 20, 1, false, true, true);
+        target.addStatusEffect(poison);
+
         if (shouldDealAdditionalDamage(attacker)) {
             ServerWorld serverWorld = (ServerWorld)attacker.getWorld();
-
-            var poison = new StatusEffectInstance(StatusEffects.POISON, 6 * 20, 1, false, true, true);
-            target.addStatusEffect(poison);
-
             AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(EntityType.AREA_EFFECT_CLOUD,serverWorld);
             serverWorld.spawnEntity(areaEffectCloudEntity);
             areaEffectCloudEntity.setPosition(target.getPos());

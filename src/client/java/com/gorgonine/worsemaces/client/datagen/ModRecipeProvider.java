@@ -28,7 +28,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             @Override
             public void generate() {
                 //MACES
-                createShaped(RecipeCategory.MISC, ModItems.WOODEN_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.WOODEN_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -36,7 +36,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.STICK)
                         .criterion(hasItem(ModBlocks.WOODEN_CORE), conditionsFromItem(ModBlocks.WOODEN_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "wooden_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.UNFINISHED_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.UNFINISHED_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -44,7 +44,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.STICK)
                         .criterion(hasItem(ModBlocks.UNFINISHED_CORE), conditionsFromItem(ModBlocks.UNFINISHED_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "unfinished_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.GAMBLERS_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.GAMBLERS_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -52,15 +52,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.BREEZE_ROD)
                         .criterion(hasItem(ModBlocks.GAMBLERS_CORE), conditionsFromItem(ModBlocks.GAMBLERS_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "gamblers_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.BRASS_BELL_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.BRASS_BELL_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
                         .input('C', ModBlocks.BRASS_BELL_CORE)
-                        .input('s', Items.IRON_INGOT)
+                        .input('s', Items.GOLD_INGOT)
                         .criterion(hasItem(ModBlocks.BRASS_BELL_CORE), conditionsFromItem(ModBlocks.BRASS_BELL_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "brass_bell_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.POTION_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.POTION_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -68,7 +68,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.GLASS)
                         .criterion(hasItem(ModBlocks.POTION_CORE), conditionsFromItem(ModBlocks.POTION_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "potion_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.GROSS_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.GROSS_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -76,7 +76,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.SLIME_BALL)
                         .criterion(hasItem(ModBlocks.GROSS_CORE), conditionsFromItem(ModBlocks.GROSS_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "gross_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.APPLE_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.APPLE_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -84,7 +84,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.STICK)
                         .criterion(hasItem(ModBlocks.APPLE_CORE), conditionsFromItem(ModBlocks.APPLE_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "apple_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.PUFFERFISH_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.PUFFERFISH_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -92,7 +92,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.COD)
                         .criterion(hasItem(ModBlocks.PUFFERFISH_CORE), conditionsFromItem(ModBlocks.PUFFERFISH_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "pufferfish_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.TNT_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.TNT_MACE)
                         .pattern(" C ")
                         .pattern(" s ")
                         .pattern("   ")
@@ -100,12 +100,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.CHAIN)
                         .criterion(hasItem(ModBlocks.TNT_CORE), conditionsFromItem(ModBlocks.TNT_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "tnt_mace_crafting_recipe_1")));
-                createShaped(RecipeCategory.MISC, ModItems.COMMAND_BLOCK_MACE)
+                createShaped(RecipeCategory.COMBAT, ModItems.COMMAND_BLOCK_MACE)
                         .pattern(" C ")
-                        .pattern(" s ")
-                        .pattern("   ")
+                        .pattern(" i ")
+                        .pattern(" d ")
                         .input('C', ModBlocks.COMMAND_BLOCK_CORE)
-                        .input('s', Items.STICK)
+                        .input('i', Items.IRON_INGOT)
+                        .input('d', Items.DIAMOND)
                         .criterion(hasItem(ModBlocks.COMMAND_BLOCK_CORE), conditionsFromItem(ModBlocks.COMMAND_BLOCK_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "command_block_mace_crafting_recipe_1")));
 
@@ -140,8 +141,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("WeW")
                         .pattern("W W")
                         .input('W', Items.BELL)
-                        .input('e', Items.NETHER_STAR)
-                        .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
+                        .input('e', Items.HEAVY_CORE)
+                        .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "brass_bell_core_crafting_recipe")));
                 createShaped(RecipeCategory.MISC, ModBlocks.POTION_CORE)
                         .pattern("WWW")
@@ -150,7 +151,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('W', Items.POTION)
                         .input('s', Items.GLASS)
                         .input('e', Items.HEAVY_CORE)
-                        .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
+                        .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "potion_core_crafting_recipe")));
                 createShaped(RecipeCategory.MISC, ModBlocks.GROSS_CORE)
                         .pattern("WeW")
@@ -185,19 +186,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .input('s', Items.HEAVY_CORE)
                         .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "tnt_core_crafting_recipe")));
-                createShaped(RecipeCategory.MISC, ModBlocks.COMMAND_BLOCK_CORE)
-                        .pattern("ABC")
-                        .pattern("DEF")
-                        .pattern("GHI")
-                        .input('A', ModItems.WOODEN_MACE)
-                        .input('B', ModItems.UNFINISHED_MACE)
-                        .input('C', ModItems.GAMBLERS_MACE)
-                        .input('D', ModItems.BRASS_BELL_MACE)
-                        .input('E', ModItems.POTION_MACE)
-                        .input('F', ModItems.GROSS_MACE)
-                        .input('G', ModItems.APPLE_MACE)
-                        .input('H', ModItems.PUFFERFISH_MACE)
-                        .input('I', ModItems.TNT_MACE)
+                createShapeless(RecipeCategory.MISC, ModBlocks.COMMAND_BLOCK_CORE)
+                        .input(ModItems.WOODEN_MACE)
+                        .input(ModItems.UNFINISHED_MACE)
+                        .input(ModItems.GAMBLERS_MACE)
+                        .input(ModItems.BRASS_BELL_MACE)
+                        .input(ModItems.POTION_MACE)
+                        .input(ModItems.GROSS_MACE)
+                        .input(ModItems.APPLE_MACE)
+                        .input(ModItems.PUFFERFISH_MACE)
+                        .input(ModItems.TNT_MACE)
                         .criterion(hasItem(Items.HEAVY_CORE), conditionsFromItem(Items.HEAVY_CORE))
                         .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(WorseMaces.MOD_ID, "command_block_core_crafting_recipe")));
             }

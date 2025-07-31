@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
     "C": "worsemaces:brass_bell_core",
-    "s": "minecraft:iron_ingot"
+    "s": "minecraft:gold_ingot"
   },
   "pattern": [
     " C ",

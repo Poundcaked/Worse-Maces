@@ -92,7 +92,7 @@ public class BrassBellMace extends Item {
                     target.getBlockPos(), // The position of where the sound will come from
                     ModSounds.tinnitus, // The sound that will play
                     SoundCategory.PLAYERS, // This determines which of the volume sliders affect this sound
-                    1f, //Volume multiplier, 1 is normal, 0.5 is half volume, etc
+                    16.0f, //Volume multiplier, 1 is normal, 0.5 is half volume, etc
                     1f // Pitch multiplier, 1 is normal, 0.5 is half pitch, etc
             );
             knockbackNearbyEntities(serverWorld, attacker, target);

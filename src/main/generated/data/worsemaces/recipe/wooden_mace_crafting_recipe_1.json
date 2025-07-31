@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
     "C": "worsemaces:wooden_core",
     "s": "minecraft:stick"

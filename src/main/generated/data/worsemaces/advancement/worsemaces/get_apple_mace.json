@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_gross_mace",
+  "criteria": {
+    "get_apple_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:apple_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.apple_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:apple_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.apple_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_apple_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

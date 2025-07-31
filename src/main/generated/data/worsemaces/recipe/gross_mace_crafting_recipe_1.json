@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
     "C": "worsemaces:gross_core",
     "s": "minecraft:slime_ball"

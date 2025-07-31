@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_wooden_mace",
+  "criteria": {
+    "get_unfinished_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:unfinished_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.unfinished_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:unfinished_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.unfinished_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_unfinished_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

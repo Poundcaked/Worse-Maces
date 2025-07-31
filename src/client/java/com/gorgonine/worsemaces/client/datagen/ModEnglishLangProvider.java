@@ -35,8 +35,8 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.worsemaces.tnt_core", "TNT Core");
         translationBuilder.add("item.worsemaces.command_block_core", "Command Block Core");
 
-        translationBuilder.add("itemgroup.worsemaces.maces_group", "Maces Group");
-        translationBuilder.add("itemgroup.worsemaces.cores_group", "Core Group");
+        translationBuilder.add("itemgroup.worsemaces.maces_group", "Maces");
+        translationBuilder.add("itemgroup.worsemaces.cores_group", "Cores");
 
         translationBuilder.add("effect.worsemaces.splinter", "Splinter");
 
@@ -74,5 +74,29 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.worsemaces.command_block_mace.tooltip.1","Smash an enemy to run a random command");
         translationBuilder.add("item.worsemaces.command_block_mace.tooltip.2","Right click a block to place a random block");
         translationBuilder.add("item.worsemaces.command_block_mace.tooltip.3","Right click the air to launch a random mob");
+
+        translationBuilder.add("advancement.worsemaces.root.title","Worse Maces");
+        translationBuilder.add("advancement.worsemaces.root.description","They're not very good");
+
+        translationBuilder.add("advancement.worsemaces.wooden_mace.title","Baby's First Mace");
+        translationBuilder.add("advancement.worsemaces.wooden_mace.description","Obtain a Wooden Mace");
+        translationBuilder.add("advancement.worsemaces.unfinished_mace.title","Gt n Unfinis Mae");
+        translationBuilder.add("advancement.worsemaces.unfinished_mace.description","Smash your heavy core to bits to make it incomplete, then craft it into a mace");
+        translationBuilder.add("advancement.worsemaces.gamblers_mace.title","All on Black");
+        translationBuilder.add("advancement.worsemaces.gamblers_mace.description","Gamble your wither skeleton skulls away to make a hopeful mace");
+        translationBuilder.add("advancement.worsemaces.brass_bell_mace.title","Ringing Ears");
+        translationBuilder.add("advancement.worsemaces.brass_bell_mace.description","Use 5 Bells and a heavy core to make a really loud mace");
+        translationBuilder.add("advancement.worsemaces.potion_mace.title","Heavy Brewery");
+        translationBuilder.add("advancement.worsemaces.potion_mace.description","Use any potion to create an effective mace");
+        translationBuilder.add("advancement.worsemaces.gross_mace.title","Chopped Cheese");
+        translationBuilder.add("advancement.worsemaces.gross_mace.description","Use the grossest things in Minecraft to make a perfectly good heavy core into a gross mess");
+        translationBuilder.add("advancement.worsemaces.apple_mace.title","Keeping the Doctor Away");
+        translationBuilder.add("advancement.worsemaces.apple_mace.description","Use your harvest to create the Greenest Mace");
+        translationBuilder.add("advancement.worsemaces.pufferfish_mace.title","Blow Up");
+        translationBuilder.add("advancement.worsemaces.pufferfish_mace.description","Destroy the pufferfish population to create a poisonous mace");
+        translationBuilder.add("advancement.worsemaces.tnt_mace.title","Now I Have Become Death");
+        translationBuilder.add("advancement.worsemaces.tnt_mace.description","Create, possibly, the best mace of the worst maces");
+        translationBuilder.add("advancement.worsemaces.command_block_mace.title","Zenith");
+        translationBuilder.add("advancement.worsemaces.command_block_mace.description","Combine all your maces to create the worst mace");
     }
 }

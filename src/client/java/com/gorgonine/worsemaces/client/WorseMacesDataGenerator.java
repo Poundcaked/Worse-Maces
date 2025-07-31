@@ -15,5 +15,6 @@ public class WorseMacesDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider(ModLootTableProvider::new);
         pack.addProvider(ModEnglishLangProvider::new);
+        pack.addProvider(ModAdvancementProvider::new);
     }
 }

@@ -3,6 +3,7 @@ package com.gorgonine.worsemaces.item;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
@@ -22,6 +23,7 @@ import net.minecraft.item.*;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -82,9 +84,9 @@ public class CommandBlockMace extends Item {
         return new ToolComponent(List.of(), 1.0F, 2, false);
     }
 
+
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (shouldDealAdditionalDamage(attacker)) {
-
             String[] commands = {
                     "execute at @r run summon hoglin",
                     "give @a stick 2",
@@ -97,7 +99,6 @@ public class CommandBlockMace extends Item {
                     "say \"Pisrat is banned\"",
                     "tick sprint 1000",
                     "tellraw @a {\"text\":\"steve_buildingyt whispers to you: i love crosshair x\",\"italic\":true,\"color\":\"gray\"}",
-                    "give @r written_book{pages:['{\"text\":\"Who here smells?\\\\n\\\\nRead Page 52 for the answer\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\"}','{\"text\":\"\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\n\\\\nI don\\'t know\"}','{\"text\":\"Brah passed\"}'],title:\"INFO.. IMPORTANT!\",author:Notch}",
                     "place structure minecraft:village_taiga",
                     "execute at @r run fill ~2 ~2 ~2 ~-2 ~-2 ~-2 glass",
                     "execute at @a run playsound minecraft:entity.wither.death master @a ~ ~ ~",
@@ -117,7 +118,7 @@ public class CommandBlockMace extends Item {
                     "effect give @a minecraft:speed 3 255 true",
                     "give @r cocoa_beans[custom_name=[{\"text\":\"Hog Scat\",\"italic\":false}],rarity=uncommon,attribute_modifiers=[{type:gravity,amount:0.04,operation:add_value,id:\"1753834238348\"}],can_place_on=[{blocks:acacia_leaves}],tooltip_display={hidden_components:[attribute_modifiers,can_break,can_place_on]}] 2304",
                     "execute at @r run fill ~1 ~ ~1 ~-1 ~-64 ~-1 air",
-                    "execute at @r run particle minecraft:explosion ~ ~ ~ ~ ~ ~ 151 999999 force",
+                    "execute at @r run particle minecraft:explosion ~ ~ ~ ~ ~ ~ 50 999 force",
                     "execute at @e run summon cod",
                     "execute at @r run summon squid ^ ^1.5 ^1",
                     "execute at @r run summon glow_squid ^ ^1.5 ^1",
@@ -125,12 +126,9 @@ public class CommandBlockMace extends Item {
                     "tellraw @a [{\"text\":\"<\"},{\"selector\":\"@r\"},{\"text\":\"> I eat dung\"}]",
                     "tellraw @a [{\"text\":\"<\"},{\"selector\":\"@r\"},{\"text\":\"> I eat dung\"}]",
                     "tellraw @a [{\"text\":\"<\"},{\"selector\":\"@r\"},{\"text\":\"> hey guys. i am broke. can anyone give me a lot of free things. i am broke\"}]",
-                    "title @a title [{\"selector\":\"@s\",\"color\":\"green\"},{\"text\":\" has won.\",\"color\":\"green\"}]",
-                    "tellraw @a [{\"text\":\"POP QUIZ\",\"underlined\":true,\"color\":\"yellow\",\"bold\":true},{\"text\":\": Who was Ea-Nasir?\",\"underlined\":true},\"\\n\\n\",{\"text\":\"A)\",\"bold\":true,\"color\":\"red\",\"click_event\":{\"action\":\"run_command\",\"command\":\"I am a big smelly ape-like individual who thinks that Steve has a brother \uD83E\uDD23\uD83D\uDE02\uD83D\uDE02\uD83D\uDE02\"}},{\"text\":\" Steve's Brother\",\"click_event\":{\"action\":\"run_command\",\"command\":\"I am a big smelly ape-like individual who thinks that Steve has a brother \uD83E\uDD23\uD83D\uDE02\uD83D\uDE02\uD83D\uDE02\"}},\"  | \",{\"text\":\"B)\",\"color\":\"green\",\"bold\":true,\"click_event\":{\"action\":\"run_command\",\"command\":\"say I am a giant foolish individual and I like to eat plobs and also I am a fool\"}},{\"text\":\" A Nigerian Backflip Master\",\"click_event\":{\"action\":\"run_command\",\"command\":\"say I am a giant foolish individual and I like to eat plobs and also I am a fool\"}},\"\\n-------------------------------------------------------\\n\",{\"text\":\"C)\",\"bold\":true,\"color\":\"yellow\",\"click_event\":{\"action\":\"run_command\",\"command\":\"/say I am the trivia God!\"}},{\"text\":\" A copper merchant\",\"click_event\":{\"action\":\"run_command\",\"command\":\"/say I am the trivia God!\"}},\"| \",{\"text\":\"D)\",\"bold\":true,\"color\":\"dark_blue\",\"click_event\":{\"action\":\"run_command\",\"command\":\"say I am a huge FOOL and I did not know that https://en.wikipedia.org/wiki/Shiva\"}},{\"text\":\" The Hindu Destroyer of Worlds\",\"click_event\":{\"action\":\"run_command\",\"command\":\"say I am a huge FOOL and I did not know that https://en.wikipedia.org/wiki/Shiva\"}},\"\\n \"]",
+                    "title @a title [{\"selector\":\"@r\",\"color\":\"green\"},{\"text\":\" has won.\",\"color\":\"green\"}]",
                     "summon bat ~ ~ ~ {Invulnerable:1b,Silent:1b,active_effects:[{id:resistance,duration:99999,amplifier:5,show_particles:0b}],Passengers:[{id:ravager,CustomName:[{text:\"Joandre Olmeda\",color:blue},{text:\", The Beast!\",color:blue}],Glowing:1b,PersistenceRequired:1b,active_effects:[{id:resistance,duration:999999,amplifier:5,show_particles:0b},{id:strength,duration:999999,amplifier:1,show_particles:0b},{id:speed,duration:999999,amplifier:4,show_particles:0b},{id:conduit_power,duration:999999,amplifier:4,show_particles:0b},{id:fire_resistance,duration:999999,amplifier:4,show_particles:0b},{id:oozing,duration:999999,amplifier:4,show_particles:0b},{id:infested,duration:999999,amplifier:4,show_particles:0b},{id:slow_falling,duration:999999,amplifier:1,show_particles:0b}],PatrolLeader:1b,equipment:{mainhand:{id:netherite_axe,count:1},offhand:{id:netherite_axe,count:1},head:{id:netherite_helmet,count:1},chest:{id:netherite_chestplate,count:1},legs:{id:netherite_leggings,count:1},feet:{id:netherite_boots,count:1}},drop_chances:{mainhand:0f,offhand:0f,head:0f,chest:0f,legs:0f,feet:0f}}]}",
-                    "title @a title [{\"text\":\"\\\"\",\"bold\":true},\"I \",{\"text\":\"hate\",\"bold\":true,\"color\":\"dark_red\"},{\"text\":\" \",\"bold\":true},\"Sacramento\",{\"text\":\"\\\"\",\"bold\":true},\" \",{\"text\":\"-\",\"color\":\"aqua\"},{\"text\":\"Olmeda\",\"color\":\"blue\"},{\"text\":\",\",\"color\":\"dark_blue\"},{\"text\":\" Joandre\",\"color\":\"dark_aqua\"},\" \",{\"text\":\"5/28/25\",\"italic\":true}]",
                     "give @p minecraft:player_head[minecraft:custom_name={\"text\":\"Heavy Core\",\"color\":\"light_purple\",\"underlined\":false,\"bold\":false,\"italic\":false},minecraft:lore=[{\"text\":\"Ingredients\",\"color\":\"blue\",\"italic\":false}],profile={id:[I;1495133147,-1925232252,-1844803383,1289169941],properties:[{name:\"textures\",value:\"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmI2ZjRlNzBjYzZiOTA3NDAxMDg2MmM3OGFmYmYxMzE1MDc0YzliMDAwZjhiMjI3YWUxMzM3ZWI3ZmIwZDYwZCJ9fX0=\"}]}] 1"
-
             };
 
             String command = commands[random.nextInt(commands.length)];
@@ -234,6 +232,7 @@ public class CommandBlockMace extends Item {
         EntityType[] disallowedEntities = {
                 EntityType.WITHER,
                 EntityType.ENDER_DRAGON,
+                EntityType.ELDER_GUARDIAN,
                 EntityType.BREEZE_WIND_CHARGE,
                 EntityType.WITHER_SKULL,
                 EntityType.FALLING_BLOCK,
@@ -250,7 +249,43 @@ public class CommandBlockMace extends Item {
                 EntityType.PLAYER,
                 EntityType.SHULKER_BULLET,
                 EntityType.CREAKING,
-                EntityType.SPLASH_POTION
+                EntityType.SPLASH_POTION,
+                EntityType.ENDER_PEARL,
+                EntityType.EYE_OF_ENDER,
+                EntityType.WIND_CHARGE,
+
+                EntityType.BAMBOO_RAFT,
+                EntityType.BAMBOO_CHEST_RAFT,
+
+                EntityType.OAK_BOAT,
+                EntityType.OAK_CHEST_BOAT,
+                EntityType.SPRUCE_BOAT,
+                EntityType.SPRUCE_CHEST_BOAT,
+                EntityType.BIRCH_BOAT,
+                EntityType.BIRCH_CHEST_BOAT,
+                EntityType.JUNGLE_BOAT,
+                EntityType.JUNGLE_CHEST_BOAT,
+                EntityType.ACACIA_BOAT,
+                EntityType.ACACIA_CHEST_BOAT,
+                EntityType.DARK_OAK_BOAT,
+                EntityType.DARK_OAK_CHEST_BOAT,
+                EntityType.MANGROVE_BOAT,
+                EntityType.MANGROVE_CHEST_BOAT,
+                EntityType.CHERRY_BOAT,
+                EntityType.CHERRY_CHEST_BOAT,
+                EntityType.PALE_OAK_BOAT,
+                EntityType.PALE_OAK_CHEST_BOAT,
+
+                EntityType.MINECART,
+                EntityType.CHEST_MINECART,
+                EntityType.FURNACE_MINECART,
+                EntityType.HOPPER_MINECART,
+
+                EntityType.AREA_EFFECT_CLOUD,
+                EntityType.LINGERING_POTION,
+                EntityType.PAINTING,
+
+                EntityType.HOGLIN
         };
 
         for(int i = 0; i < Registries.ENTITY_TYPE.size(); i++){
@@ -262,10 +297,20 @@ public class CommandBlockMace extends Item {
         return entities;
     }
 
+    private static boolean shouldCancelRightClickAttempt(PlayerEntity playerEntity) {
+        return     playerEntity.getOffHandStack().contains(DataComponentTypes.CAN_PLACE_ON)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.EQUIPPABLE)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.BLOCKS_ATTACKS)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.CONSUMABLE)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.BLOCK_STATE)
+                || playerEntity.getOffHandStack().getItem() instanceof BlockItem
+                || playerEntity.getOffHandStack().isOf(Items.WIND_CHARGE);
+    }
+
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        if(!world.isClient){
-            if(!user.getOffHandStack().isOf(Items.WIND_CHARGE)){
+        if(!world.isClient) {
+            if(!shouldCancelRightClickAttempt(user)){
                 ItemCooldownManager itemCooldownManager = user.getItemCooldownManager();
                 ArrayList<EntityType> entityTypes = getAllMobs();
                 EntityType entityType = entityTypes.get(random.nextInt(entityTypes.size()));
@@ -273,21 +318,20 @@ public class CommandBlockMace extends Item {
                 entity.setVelocity(user.getRotationVector().normalize().multiply(2.5d));
                 world.playSound(null,user.getX(),user.getY(),user.getZ(),SoundEvents.BLOCK_BEACON_DEACTIVATE,SoundCategory.PLAYERS,1.0F,1.0F);
 
-                user.swingHand(hand);
-
                 itemCooldownManager.set(user.getMainHandStack(), 1 * 20);
 
-                return ActionResult.SUCCESS;
+
             }
-            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
 
         }
-        return ActionResult.FAIL;
+
+        user.swingHand(hand);
+        return !world.isClient && !shouldCancelRightClickAttempt(user) ? ActionResult.SUCCESS : ActionResult.FAIL;
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if(!context.getPlayer().getOffHandStack().isOf(Items.WIND_CHARGE)){
+        if(!shouldCancelRightClickAttempt(context.getPlayer())){
             World world = context.getWorld();
             if(!context.getWorld().isClient){
                 HitResult hit = context.getPlayer().raycast(20, 0, false); // 20 is distance used by the DebugHud for "looking at block", false means ignore fluids
@@ -299,21 +343,20 @@ public class CommandBlockMace extends Item {
                     ArrayList<Block> blocks = getAllBlocks();
                     BlockState randomBlockState = blocks.get(random.nextInt(getAllBlocks().size())).getPlacementState(new ItemPlacementContext(context));
 
-                    if(!context.getBlockPos().add(direction.getVector()).equals(context.getPlayer().getBlockPos()) || context.getBlockPos().add(direction.getVector()).add(0,1,0).equals(context.getPlayer().getBlockPos())){
-                        world.setBlockState(context.getBlockPos().add(direction.getVector()), randomBlockState);
-
-                        world.playSound(null,context.getBlockPos().add(direction.getVector()),randomBlockState.getSoundGroup().getPlaceSound(), SoundCategory.BLOCKS,1.0F,1.0F);
-
-                        itemCooldownManager.set(context.getStack(), 8 * 20);
-
-                        return ActionResult.SUCCESS;
-                    }else{
-                        return ActionResult.FAIL;
+                    while(randomBlockState == null){
+                        randomBlockState = blocks.get(random.nextInt(getAllBlocks().size())).getPlacementState(new ItemPlacementContext(context));
                     }
+
+                    world.setBlockState(context.getBlockPos().add(direction.getVector()), randomBlockState);
+
+                    world.playSound(null,context.getBlockPos().add(direction.getVector()),randomBlockState.getSoundGroup().getPlaceSound(), SoundCategory.BLOCKS,1.0F,1.0F);
+
+                    itemCooldownManager.set(context.getStack(), 8 * 20);
                 }
             }
         }
-        return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        context.getPlayer().swingHand(context.getHand());
+        return !context.getWorld().isClient && !shouldCancelRightClickAttempt(context.getPlayer()) ? ActionResult.SUCCESS : ActionResult.FAIL;
     }
 
     public double getFormulaMinimum(double playerFallDistance){

@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_potion_mace",
+  "criteria": {
+    "get_gross_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:gross_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.gross_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:gross_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.gross_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_gross_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,6 +1,7 @@
 package com.gorgonine.worsemaces.item;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
@@ -16,22 +17,25 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
@@ -77,33 +81,42 @@ public class GrossMace extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        BlockPos originPos = context.getBlockPos().add(-1,0,-1);
-        for(int i = 0; i < 3; i ++){
-            for(int j = 0; j < 3; j++){
-                if(!context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.AIR) && !context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.SLIME_BLOCK)){
-                    context.getWorld().setBlockState(originPos.add(i,0,j), Blocks.SLIME_BLOCK.getDefaultState());
-                    context.getWorld().playSound(null,context.getBlockPos(),SoundEvents.BLOCK_SLIME_BLOCK_PLACE, SoundCategory.BLOCKS,1.0F, random.nextFloat(1.8F));
-                    if(!context.getPlayer().isInCreativeMode()){
-                        ItemStack itemStack = context.getPlayer().getStackInHand(context.getHand());
-                        itemStack.damage(1,context.getPlayer());
+        if (shouldCancelRightClickAttempt(context.getPlayer())) {
+            return ActionResult.PASS;
+        }else{
+            BlockPos originPos = context.getBlockPos().add(-1,0,-1);
+            for(int i = 0; i < 3; i ++){
+                for(int j = 0; j < 3; j++){
+                    if(!context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.AIR) && !context.getWorld().getBlockState(originPos.add(i,0,j)).getBlock().equals(Blocks.SLIME_BLOCK)){
+                        context.getWorld().setBlockState(originPos.add(i,0,j), Blocks.SLIME_BLOCK.getDefaultState());
+                        context.getWorld().playSound(null,context.getBlockPos(),SoundEvents.BLOCK_SLIME_BLOCK_PLACE, SoundCategory.BLOCKS,1.0F, random.nextFloat(1.8F));
+                        if(!context.getPlayer().isInCreativeMode()){
+                            ItemStack itemStack = context.getPlayer().getStackInHand(context.getHand());
+                            itemStack.damage(1,context.getPlayer());
+                        }
+
                     }
 
                 }
-
             }
+            return ActionResult.SUCCESS;
         }
+    }
 
-        return ActionResult.SUCCESS;
+    private static boolean shouldCancelRightClickAttempt(PlayerEntity playerEntity) {
+        return     playerEntity.getOffHandStack().contains(DataComponentTypes.CAN_PLACE_ON)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.EQUIPPABLE)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.BLOCKS_ATTACKS)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.CONSUMABLE)
+                || playerEntity.getOffHandStack().contains(DataComponentTypes.BLOCK_STATE)
+                || playerEntity.getOffHandStack().getItem() instanceof BlockItem
+                || playerEntity.getOffHandStack().isOf(Items.WIND_CHARGE);
     }
 
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         var oozing = new StatusEffectInstance(StatusEffects.OOZING, 15 * 20, 1, false, true, true); //get oozing
         target.addStatusEffect(oozing);
-
-
-
         if (shouldDealAdditionalDamage(attacker)) {
-
             if (random.nextInt(100) < 25){
                 for(int i = 0; i < random.nextInt(4); i++){
                     SlimeEntity slime = new SlimeEntity(EntityType.SLIME, target.getWorld());

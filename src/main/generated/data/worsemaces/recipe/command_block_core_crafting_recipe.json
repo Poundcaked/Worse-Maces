@@ -1,21 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "key": {
-    "A": "worsemaces:wooden_mace",
-    "B": "worsemaces:unfinished_mace",
-    "C": "worsemaces:gamblers_mace",
-    "D": "worsemaces:brass_bell_mace",
-    "E": "worsemaces:potion_mace",
-    "F": "worsemaces:gross_mace",
-    "G": "worsemaces:apple_mace",
-    "H": "worsemaces:pufferfish_mace",
-    "I": "worsemaces:tnt_mace"
-  },
-  "pattern": [
-    "ABC",
-    "DEF",
-    "GHI"
+  "ingredients": [
+    "worsemaces:wooden_mace",
+    "worsemaces:unfinished_mace",
+    "worsemaces:gamblers_mace",
+    "worsemaces:brass_bell_mace",
+    "worsemaces:potion_mace",
+    "worsemaces:gross_mace",
+    "worsemaces:apple_mace",
+    "worsemaces:pufferfish_mace",
+    "worsemaces:tnt_mace"
   ],
   "result": {
     "count": 1,

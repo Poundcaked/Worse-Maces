@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/root",
+  "criteria": {
+    "get_wooden_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:wooden_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.wooden_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:wooden_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.wooden_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_wooden_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

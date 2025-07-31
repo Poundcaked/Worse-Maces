@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_gamblers_mace",
+  "criteria": {
+    "get_brass_bell_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:brass_bell_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.brass_bell_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:brass_bell_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.brass_bell_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_brass_bell_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_unfinished_mace",
+  "criteria": {
+    "get_gamblers_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:gamblers_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.gamblers_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:gamblers_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.gamblers_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_gamblers_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

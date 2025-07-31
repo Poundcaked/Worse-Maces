@@ -1,0 +1,33 @@
+{
+  "parent": "worsemaces:worsemaces/get_brass_bell_mace",
+  "criteria": {
+    "get_potion_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "worsemaces:potion_mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.worsemaces.potion_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "worsemaces:potion_mace"
+    },
+    "title": {
+      "translate": "advancement.worsemaces.potion_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_potion_mace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
